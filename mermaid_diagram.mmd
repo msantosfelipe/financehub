@@ -10,7 +10,7 @@ class Accounts {
     +int accountNumber
     +string pix
     +string loginUser
-    +List~AccountType~ accountType
+    AccountType accountType
     +string useDescription
     +bool active
 
@@ -21,6 +21,7 @@ class Accounts {
 }
 class AccountType {
     <<enumeration>>
+    +NOT_DEFINED
     +CHECKING_ACCOUNT
     +INVESTMENT
 }
