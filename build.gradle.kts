@@ -23,6 +23,7 @@ dependencies {
     runtimeOnly("org.flywaydb:flyway-database-postgresql")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("io.micronaut:micronaut-http-client")
+    runtimeOnly("org.yaml:snakeyaml")
 }
 
 

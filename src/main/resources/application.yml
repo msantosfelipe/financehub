@@ -1,0 +1,15 @@
+micronaut:
+  application:
+    name: financehub
+  server:
+    port: 8081
+
+flyway:
+  datasources:
+    default:
+      enabled: true
+
+datasources:
+  default:
+    db-type: postgres
+    driver-class-name: org.postgresql.Driver
