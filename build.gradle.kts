@@ -3,6 +3,7 @@ plugins {
     id("com.gradleup.shadow") version "8.3.6"
     id("io.micronaut.test-resources") version "4.5.3"
     id("io.micronaut.aot") version "4.5.3"
+    kotlin("jvm")
 }
 
 version = "0.1"
@@ -24,6 +25,7 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("io.micronaut:micronaut-http-client")
     runtimeOnly("org.yaml:snakeyaml")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 
@@ -31,8 +33,6 @@ application {
     mainClass = "com.msantosfelipe.financehub.Application"
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("21")
-    targetCompatibility = JavaVersion.toVersion("21")
 }
 
 
@@ -68,3 +68,6 @@ tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative"
 }
 
 
+kotlin {
+    jvmToolchain(21)
+}

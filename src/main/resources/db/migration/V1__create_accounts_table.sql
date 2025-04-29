@@ -2,7 +2,7 @@ CREATE TYPE account_type_enum AS ENUM ('NOT_DEFINED', 'CHECKING_ACCOUNT', 'INVES
 
 CREATE TABLE accounts (
     id UUID PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
     bank_code INT,
     agency INT,
     account_number INT,
