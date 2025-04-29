@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: financehub-postgres
+    image: postgres:15.8
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: financehub
+    ports:
+      - "5432:5432"
