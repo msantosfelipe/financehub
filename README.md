@@ -1,40 +1,230 @@
 # FianceHub
 
-## Micronaut 4.8.2 Documentation
+FinanceHub is a personal finance management application inspired by a spreadsheet I've been using for the past few years.
 
-- [User Guide](https://docs.micronaut.io/4.8.2/guide/index.html)
-- [API Reference](https://docs.micronaut.io/4.8.2/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/4.8.2/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
+The project is built using:
+- Kotlin
+- Micronaut
+- Java 21
+- PostgreSQL
+
+
+## Architecture
+It follows the principles of Domain-Driven Design (DDD) using a Hexagonal Architecture (Ports and Adapters), which helps to keep the domain logic isolated from external concerns such as databases and APIs.
+
+### Domain Design Diagram
+```mermaid
 ---
+title: FinanceHub
+---
+classDiagram
+class Accounts {
+    +uuid id
+    +string name
+    +int bankCode
+    +int agency
+    +int accountNumber
+    +string pix
+    +string loginUser
+    AccountType accountType
+    +string useDescription
+    +bool active
 
-- [Micronaut Gradle Plugin documentation](https://micronaut-projects.github.io/micronaut-gradle-plugin/latest/)
-- [GraalVM Gradle Plugin documentation](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html)
-- [Shadow Gradle Plugin](https://gradleup.com/shadow/)
-## Feature serialization-jackson documentation
-
-- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
-
-
-## Feature jdbc-hikari documentation
-
-- [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)
-
-
-## Feature test-resources documentation
-
-- [Micronaut Test Resources documentation](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/)
-
-
-## Feature flyway documentation
-
-- [Micronaut Flyway Database Migration documentation](https://micronaut-projects.github.io/micronaut-flyway/latest/guide/index.html)
-
-- [https://flywaydb.org/](https://flywaydb.org/)
-
-
-## Feature micronaut-aot documentation
-
-- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
+    +create(account) uuid
+    +update(account) account
+    +getAll() List~account~
+    +getAccount() account
+}
+class AccountType {
+    <<enumeration>>
+    +NOT_DEFINED
+    +CHECKING_ACCOUNT
+    +INVESTMENT
+}
+Accounts --> AccountType : reads
 
 
+class Objectives {
+    +uuid id
+    +ObjectiveHorizon objectiveHorizon
+    +Date estimatedDate
+    +Date createdDate
+    +Date updatedDate
+    +string description
+    +ObjectiveStatus status
+
+    +create(objective) uuid
+    +update(objective) objective
+    +getAll() List~objective~
+}
+class ObjectiveHorizon {
+    <<enumeration>>
+    +SHORT_TERM
+    +MEDIUM_TERM
+    +LONG_TERM
+}
+class ObjectiveStatus {
+    <<enumeration>>
+    +ACTIVE
+    +COMPLETED
+    +CANCELLED
+}
+Objectives --> ObjectiveHorizon : reads
+Objectives --> ObjectiveStatus : reads
+
+
+class Asset {
+    +uuid id
+    +string name
+    +AssetType type
+    +string ticker
+    +string country
+
+    +create(asset) uuid
+}
+class AssetType {
+    <<enumeration>>
+    +STOCK
+    +REIT
+    +ETF
+    +BOND
+}
+class AssetEarnings {
+    +uuid id
+    +uuid assetId
+    +BigDecimal totalAmountReceived
+    +YearMonth referenceMonth
+    +string notes
+
+    +createOrUpdateEarningEntry(earningEntry) uuid
+}
+AssetEarnings --> Asset : reads
+
+
+class IncomeEntry {
+    +uuid id
+    +YearMonth referenceMonth
+    +BigDecimal grossAmount
+    +BigDecimal discountAmount
+    +BigDecimal netAmount
+    +string description
+
+    createOrUpdateIncome(entry) uuid
+}
+class ExpenseEntry {
+    +uuid id
+    +YearMonth referenceMonth
+    +string category
+    +BigDecimal amount
+    +string description
+    +bool isFixed
+
+    createOrUpdateExpense(entry) uuid
+}
+class Balances {
+    +uuid id
+    +YearMonth referenceMonth
+    +BigDecimal totalGrossIncomes
+    +BigDecimal totalNetIncomes
+    +BigDecimal totalFixExpenses
+    +BigDecimal totalOtherExpenses
+    +uuid incomeUuid
+    +uuid expenseUuid
+
+    createOrUpdateBalance(balance) uuid
+    getBalances() List~balance~
+    getLastBalance() balance
+    getAnualBalance(referenceYear) balance
+}
+class InvestmentStrategies {
+    +uuid id
+    +int investableIncomePercent
+    +int fixedIncomePercent
+    +int reitsPercent
+    +int stocksPercent
+    +int cryptoPercent
+    +int internationalPercent
+    +string description
+    +Date createdDate
+    +Date updatedDate
+    +bool active
+
+    +create(strategy) uuid
+    +update(strategy) strategy
+    +getActive() strategy
+}
+class InvestmentsEntry {
+    +uuid id
+    +YearMonth referenceMonth
+    +string name
+    +BigDecimal amount
+    +InvestmentType type
+    +string description
+
+    createOrUpdateinvestment(investment) uuid
+}
+class InvestmentType {
+    <<enumeration>>
+    +FIXED_INCOME,
+    +VARIABLE_INCOME,
+    +EMERGENCY_FUND
+}
+class InvestmentsSnapshot {
+    +uuid id
+    +YearMonth referenceMonth
+    +BigDecimal totalInvested
+    +BigDecimal fixedEmergencyFundValue
+    +BigDecimal fixedIncomeValue
+    +BigDecimal variableIncomeValue
+    +string notes
+
+    getInvestmentSnapshot() List~investmentSnapshot~
+    getLastInvestmentSnapshot() investmentSnapshot
+}
+IncomeEntry --> Balances : creates
+IncomeEntry <-- Balances : reads
+ExpenseEntry --> Balances : creates
+ExpenseEntry <-- Balances : reads
+Balances --> InvestmentStrategies : reads
+Balances --> InvestmentsSnapshot : reads
+Balances <-- InvestmentsSnapshot : creates
+InvestmentsEntry --> InvestmentType : reads
+InvestmentsEntry --> InvestmentsSnapshot : creates
+
+
+
+```
+
+### Packages design
+````
+financehub/
+├── domain/
+│   ├── model/
+│   │   └── Account.kt
+│   │── usecase/
+│   │   └── AccountUseCase.kt
+├── ports/
+│   ├── in/
+│   │   └── AccountService.kt
+│   ├── out/
+│   │   └── AccountRepository.kt
+│   │   └── AccountClient.kt
+├── adapters/
+│   ├── in/
+│   │   ├── rest/
+│   │   │   └── AccountController.kt
+│   ├── out/
+│   │   ├── repository/
+│   │   │   ├── database/
+│   │   │   │   └── AccountRepositoryImpl.kt
+│   │   ├── external/
+│   │   │   ├── clients/
+│   │   │   │   └── AccountClientImpl.kt
+└── Application.kt
+````
+
+- domain/ – Contains the core business logic, including entities and use cases.
+- ports/in/ – Defines the input contracts (interfaces) for the application's use cases.
+- ports/out/ – Declares output contracts for external dependencies such as databases, caches and APIs.
+- adapters/in/ – Implements entry points like REST controllers, CLI commands, or event listeners.
+- adapters/out/ – Implements integrations with external systems such as databases, caches, and APIs.
