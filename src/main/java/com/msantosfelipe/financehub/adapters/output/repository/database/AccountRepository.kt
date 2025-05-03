@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.toList
 
 @Singleton
 class AccountRepository(
-    val repository: AccountPostgresRepository
+    val repository: AccountPostgresRepository,
 ) : AccountRepository {
     override suspend fun create(account: Account) = repository.save(entity = account).id!!
 
@@ -16,7 +16,8 @@ class AccountRepository(
 
     override suspend fun getAll(): List<Account> = repository.findAll().toList()
 
-    override suspend fun getByName(name: String): Account? = repository.findByName(name)?: throw AccountNotFoundException(
-        "Account with name $name not found"
-    )
+    override suspend fun getByName(name: String): Account? =
+        repository.findByName(name) ?: throw AccountNotFoundException(
+            "Account with name $name not found",
+        )
 }

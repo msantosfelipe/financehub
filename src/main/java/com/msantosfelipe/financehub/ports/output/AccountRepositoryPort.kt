@@ -5,8 +5,11 @@ import java.util.UUID
 
 interface AccountRepository {
     suspend fun create(account: Account): UUID
+
     suspend fun update(account: Account): Account
+
     suspend fun getAll(): List<Account>
+
     suspend fun getByName(name: String): Account?
 }
 

@@ -22,11 +22,11 @@ data class Account(
     val accountType: AccountType,
     @MappedProperty("description")
     val useDescription: String?,
-    val active: Boolean
+    val active: Boolean,
 )
 
 enum class AccountType {
     CHECKING_ACCOUNT,
     INVESTMENT,
-    NOT_DEFINED
+    NOT_DEFINED,
 }

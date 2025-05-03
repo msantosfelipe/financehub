@@ -1,15 +1,15 @@
 package com.msantosfelipe.financehub.domain.usecase
 
-import com.msantosfelipe.financehub.ports.output.AccountRepository
 import com.msantosfelipe.financehub.domain.model.Account
 import com.msantosfelipe.financehub.ports.input.AccountServicePort
+import com.msantosfelipe.financehub.ports.output.AccountRepository
 import jakarta.inject.Singleton
 import java.util.UUID
 
 @Singleton
 class AccountUseCase(
-    private val accountRepository: AccountRepository
-): AccountServicePort {
+    private val accountRepository: AccountRepository,
+) : AccountServicePort {
     override suspend fun createAccount(account: Account): UUID {
         // TODO
         return accountRepository.create(account)

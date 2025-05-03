@@ -11,16 +11,17 @@ import io.micronaut.http.annotation.Produces
 
 @Controller("api/v1/accounts")
 class AccountController(
-    val accountService: AccountServicePort
+    val accountService: AccountServicePort,
 ) {
     @Post
     @Produces(MediaType.APPLICATION_JSON)
-    suspend fun create(@Body account: Account) {
+    suspend fun create(
+        @Body account: Account,
+    ) {
         accountService.createAccount(account)
     }
 
     @Get
     @Produces(MediaType.APPLICATION_JSON)
     suspend fun getAllAccounts(): List<Account> = accountService.getAllAccounts()
-
 }

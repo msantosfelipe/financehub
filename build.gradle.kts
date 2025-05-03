@@ -4,6 +4,8 @@ plugins {
     id("io.micronaut.test-resources") version "4.5.3"
     id("io.micronaut.aot") version "4.5.3"
     id("org.jetbrains.kotlin.kapt") version "2.1.10"
+    id("org.jlleitschuh.gradle.ktlint") version "12.2.0"
+
     kotlin("jvm")
 }
 
@@ -37,13 +39,11 @@ dependencies {
     kapt("io.micronaut:micronaut-inject-java")
 }
 
-
 application {
     mainClass = "com.msantosfelipe.financehub.Application"
 }
 java {
 }
-
 
 graalvmNative.toolchainDetection = false
 
@@ -71,11 +71,9 @@ micronaut {
     }
 }
 
-
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
     jdkVersion = "21"
 }
-
 
 kotlin {
     jvmToolchain(21)
