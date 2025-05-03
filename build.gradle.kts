@@ -16,6 +16,8 @@ repositories {
     mavenCentral()
 }
 
+val kotlinxCoroutinesVersion = "1.10.2"
+
 dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
@@ -32,8 +34,8 @@ dependencies {
     runtimeOnly("org.flywaydb:flyway-database-postgresql")
     runtimeOnly("org.postgresql:postgresql")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion")
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:$kotlinxCoroutinesVersion")
 
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
     kapt("io.micronaut:micronaut-inject-java")
