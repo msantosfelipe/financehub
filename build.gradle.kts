@@ -3,6 +3,7 @@ plugins {
     id("com.gradleup.shadow") version "8.3.6"
     id("io.micronaut.test-resources") version "4.5.3"
     id("io.micronaut.aot") version "4.5.3"
+    id("org.jetbrains.kotlin.kapt") version "2.1.10"
     kotlin("jvm")
 }
 
@@ -18,14 +19,22 @@ dependencies {
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
-    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("org.flywaydb:flyway-database-postgresql")
-    runtimeOnly("org.postgresql:postgresql")
     testImplementation("io.micronaut:micronaut-http-client")
     runtimeOnly("org.yaml:snakeyaml")
     implementation(kotlin("stdlib-jdk8"))
+
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql")
+    runtimeOnly("org.postgresql:postgresql")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.10.2")
+
+    implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
+    kapt("io.micronaut:micronaut-inject-java")
 }
 
 
