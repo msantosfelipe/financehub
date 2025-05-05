@@ -1,9 +1,8 @@
 package com.msantosfelipe.financehub.domain.model
 
-import io.micronaut.data.annotation.GeneratedValue
+import com.msantosfelipe.financehub.commons.removeAccents
 import io.micronaut.data.annotation.Id
 import io.micronaut.data.annotation.MappedEntity
-import io.micronaut.data.annotation.MappedProperty
 import io.micronaut.serde.annotation.Serdeable
 import java.util.UUID
 
@@ -11,17 +10,16 @@ import java.util.UUID
 @Serdeable
 data class Account(
     @field:Id
-    @field:GeneratedValue(GeneratedValue.Type.AUTO)
-    val id: UUID? = null,
-    val name: String,
-    val bankCode: Int?,
-    val agency: Int?,
-    val accountNumber: Int?,
+    val id: UUID = UUID.randomUUID(),
+    val displayName: String,
+    val name: String = normalizeAccountName(displayName),
+    val bankCode: String?,
+    val agency: String?,
+    val accountNumber: String?,
     val pix: String?,
     val loginUser: String?,
     val accountType: AccountType,
-    @MappedProperty("description")
-    val useDescription: String?,
+    val description: String?,
     val active: Boolean,
 )
 
@@ -30,3 +28,9 @@ enum class AccountType {
     INVESTMENT,
     NOT_DEFINED,
 }
+
+internal fun normalizeAccountName(name: String): String =
+    name
+        .lowercase()
+        .replace(oldValue = " ", newValue = "_")
+        .removeAccents()

@@ -10,5 +10,7 @@ interface AccountServicePort {
 
     suspend fun getAllAccounts(): List<Account>
 
-    suspend fun getAccountByName(name: String): Account?
+    suspend fun getAccountById(uuid: UUID): Account
+
+    suspend fun getAccountByName(searchName: String): Account
 }

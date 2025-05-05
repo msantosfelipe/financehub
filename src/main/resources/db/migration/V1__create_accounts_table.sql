@@ -1,14 +1,13 @@
-CREATE TYPE account_type_enum AS ENUM ('NOT_DEFINED', 'CHECKING_ACCOUNT', 'INVESTMENT');
-
 CREATE TABLE accounts (
     id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
-    bank_code INT,
-    agency INT,
-    account_number INT,
+    display_name VARCHAR(255),
+    bank_code VARCHAR(10),
+    agency VARCHAR(10),
+    account_number VARCHAR(10),
     pix VARCHAR(255),
     login_user VARCHAR(255),
-    account_type account_type_enum DEFAULT 'NOT_DEFINED',
+    account_type VARCHAR(255) DEFAULT 'NOT_DEFINED',
     description VARCHAR(255),
     active BOOLEAN NOT NULL DEFAULT TRUE
 );

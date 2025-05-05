@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   postgres:
     container_name: financehub-postgres
@@ -10,3 +8,8 @@ services:
       POSTGRES_DB: financehub
     ports:
       - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

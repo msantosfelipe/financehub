@@ -39,6 +39,8 @@ dependencies {
 
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
     kapt("io.micronaut:micronaut-inject-java")
+
+    implementation("jakarta.persistence:jakarta.persistence-api:3.2.0")
 }
 
 application {

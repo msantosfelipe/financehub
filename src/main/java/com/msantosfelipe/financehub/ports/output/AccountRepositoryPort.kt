@@ -10,7 +10,11 @@ interface AccountRepository {
 
     suspend fun getAll(): List<Account>
 
-    suspend fun getByName(name: String): Account?
+    suspend fun getById(id: UUID): Account
+
+    suspend fun getByName(name: String): Account
 }
 
-class AccountNotFoundException(msg: String) : RuntimeException(msg)
+class AccountNotFoundException(message: String?) : RuntimeException(message)
+
+class AccountAlreadyExistsException(message: String?) : RuntimeException(message)

@@ -5,6 +5,7 @@ build/
 target/
 out/
 .micronaut/
+.kotlin/
 .idea
 *.iml
 *.ipr
