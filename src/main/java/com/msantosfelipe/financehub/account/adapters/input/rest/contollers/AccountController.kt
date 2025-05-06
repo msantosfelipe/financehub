@@ -2,8 +2,8 @@ package com.msantosfelipe.financehub.account.adapters.input.rest.contollers
 
 import com.msantosfelipe.financehub.account.adapters.input.rest.dto.CreateAccountRequest
 import com.msantosfelipe.financehub.account.adapters.input.rest.dto.UpdateAccountRequest
-import com.msantosfelipe.financehub.account.domains.model.Account
-import com.msantosfelipe.financehub.account.domains.model.AccountType
+import com.msantosfelipe.financehub.account.domain.model.Account
+import com.msantosfelipe.financehub.account.domain.model.AccountType
 import com.msantosfelipe.financehub.account.ports.input.AccountServicePort
 import com.msantosfelipe.financehub.commons.adapters.input.rest.dto.ErrorDto
 import com.msantosfelipe.financehub.commons.adapters.input.rest.dto.httpConversionErrorHandler

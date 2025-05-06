@@ -1,6 +1,6 @@
 package com.msantosfelipe.financehub.account.adapters.input.rest.dto
 
-import com.msantosfelipe.financehub.account.domains.model.AccountType
+import com.msantosfelipe.financehub.account.domain.model.AccountType
 import io.micronaut.serde.annotation.Serdeable
 
 @Serdeable

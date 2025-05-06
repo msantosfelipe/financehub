@@ -1,6 +1,6 @@
 package com.msantosfelipe.financehub.account.adapters.output.repository.database
 
-import com.msantosfelipe.financehub.account.domains.model.Account
+import com.msantosfelipe.financehub.account.domain.model.Account
 import com.msantosfelipe.financehub.account.ports.output.AccountAlreadyExistsException
 import com.msantosfelipe.financehub.account.ports.output.AccountNotFoundException
 import com.msantosfelipe.financehub.account.ports.output.AccountRepository

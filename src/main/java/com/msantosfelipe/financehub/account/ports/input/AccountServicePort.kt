@@ -1,6 +1,6 @@
 package com.msantosfelipe.financehub.account.ports.input
 
-import com.msantosfelipe.financehub.account.domains.model.Account
+import com.msantosfelipe.financehub.account.domain.model.Account
 import java.util.UUID
 
 interface AccountServicePort {
