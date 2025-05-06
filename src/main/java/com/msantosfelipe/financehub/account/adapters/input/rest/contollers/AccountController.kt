@@ -1,13 +1,19 @@
-package com.msantosfelipe.financehub.adapters.input.rest
+package com.msantosfelipe.financehub.account.adapters.input.rest.contollers
 
-import com.msantosfelipe.financehub.adapters.input.rest.dto.CreateAccountRequest
-import com.msantosfelipe.financehub.adapters.input.rest.dto.UpdateAccountRequest
-import com.msantosfelipe.financehub.domain.model.Account
-import com.msantosfelipe.financehub.domain.model.AccountType
-import com.msantosfelipe.financehub.ports.input.AccountServicePort
+import com.msantosfelipe.financehub.account.adapters.input.rest.dto.CreateAccountRequest
+import com.msantosfelipe.financehub.account.adapters.input.rest.dto.UpdateAccountRequest
+import com.msantosfelipe.financehub.account.domains.model.Account
+import com.msantosfelipe.financehub.account.domains.model.AccountType
+import com.msantosfelipe.financehub.account.ports.input.AccountServicePort
+import com.msantosfelipe.financehub.commons.adapters.input.rest.dto.ErrorDto
+import com.msantosfelipe.financehub.commons.adapters.input.rest.dto.httpConversionErrorHandler
+import io.micronaut.core.convert.exceptions.ConversionErrorException
+import io.micronaut.http.HttpRequest
+import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
+import io.micronaut.http.annotation.Error
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable
 import io.micronaut.http.annotation.Post
@@ -70,4 +76,14 @@ class AccountController(
     suspend fun getAccountByName(
         @PathVariable searchName: String,
     ): Account = accountService.getAccountByName(searchName)
+
+    @Error(global = true)
+    fun handleConversionError(
+        request: HttpRequest<*>,
+        ex: ConversionErrorException,
+    ): HttpResponse<ErrorDto> {
+        return HttpResponse.badRequest(
+            httpConversionErrorHandler(ex),
+        )
+    }
 }

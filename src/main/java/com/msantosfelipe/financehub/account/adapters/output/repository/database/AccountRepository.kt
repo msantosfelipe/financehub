@@ -1,9 +1,9 @@
-package com.msantosfelipe.financehub.adapters.output.repository.database
+package com.msantosfelipe.financehub.account.adapters.output.repository.database
 
-import com.msantosfelipe.financehub.domain.model.Account
-import com.msantosfelipe.financehub.ports.output.AccountAlreadyExistsException
-import com.msantosfelipe.financehub.ports.output.AccountNotFoundException
-import com.msantosfelipe.financehub.ports.output.AccountRepository
+import com.msantosfelipe.financehub.account.domains.model.Account
+import com.msantosfelipe.financehub.account.ports.output.AccountAlreadyExistsException
+import com.msantosfelipe.financehub.account.ports.output.AccountNotFoundException
+import com.msantosfelipe.financehub.account.ports.output.AccountRepository
 import io.micronaut.data.exceptions.DataAccessException
 import jakarta.inject.Singleton
 import kotlinx.coroutines.flow.toList

@@ -1,6 +1,6 @@
-package com.msantosfelipe.financehub.ports.output
+package com.msantosfelipe.financehub.account.ports.output
 
-import com.msantosfelipe.financehub.domain.model.Account
+import com.msantosfelipe.financehub.account.domains.model.Account
 import java.util.UUID
 
 interface AccountRepository {

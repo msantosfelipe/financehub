@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.domain.model
+package com.msantosfelipe.financehub.account.domains.model
 
 import com.msantosfelipe.financehub.commons.removeAccents
 import io.micronaut.data.annotation.Id

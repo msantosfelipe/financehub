@@ -1,8 +1,8 @@
-package com.msantosfelipe.financehub.adapters.input.rest.exception
+package com.msantosfelipe.financehub.account.adapters.input.rest.exception
 
-import com.msantosfelipe.financehub.adapters.input.rest.dto.ErrorDto
-import com.msantosfelipe.financehub.ports.output.AccountAlreadyExistsException
-import com.msantosfelipe.financehub.ports.output.AccountNotFoundException
+import com.msantosfelipe.financehub.account.ports.output.AccountAlreadyExistsException
+import com.msantosfelipe.financehub.account.ports.output.AccountNotFoundException
+import com.msantosfelipe.financehub.commons.adapters.input.rest.dto.ErrorDto
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Produces

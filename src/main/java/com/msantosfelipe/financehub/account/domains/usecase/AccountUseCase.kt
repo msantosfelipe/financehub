@@ -1,9 +1,9 @@
-package com.msantosfelipe.financehub.domain.usecase
+package com.msantosfelipe.financehub.account.domains.usecase
 
-import com.msantosfelipe.financehub.domain.model.Account
-import com.msantosfelipe.financehub.domain.model.normalizeAccountName
-import com.msantosfelipe.financehub.ports.input.AccountServicePort
-import com.msantosfelipe.financehub.ports.output.AccountRepository
+import com.msantosfelipe.financehub.account.domains.model.Account
+import com.msantosfelipe.financehub.account.domains.model.normalizeAccountName
+import com.msantosfelipe.financehub.account.ports.input.AccountServicePort
+import com.msantosfelipe.financehub.account.ports.output.AccountRepository
 import jakarta.inject.Singleton
 import java.util.UUID
 
