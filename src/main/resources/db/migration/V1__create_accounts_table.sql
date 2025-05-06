@@ -7,7 +7,7 @@ CREATE TABLE accounts (
     account_number VARCHAR(50),
     pix VARCHAR(255),
     login_user VARCHAR(255),
-    account_type VARCHAR(255) DEFAULT 'NOT_DEFINED',
+    account_type VARCHAR(255),
     description VARCHAR(255),
     active BOOLEAN NOT NULL DEFAULT TRUE
 );

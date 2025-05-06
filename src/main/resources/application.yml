@@ -10,7 +10,8 @@ flyway:
     default:
       enabled: true
       locations: classpath:db/migration
-      baseline-on-migrate: true
+      baselineOnMigrate: true
+      baselineVersion: 0
 
 datasources:
   default:
