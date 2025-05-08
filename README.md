@@ -98,8 +98,8 @@ class AssetEarnings {
 
     +createOrUpdateEarningEntry(earningEntry) uuid
 }
-AssetEarnings --> Asset : reads
-
+Asset --> AssetEarnings : reads
+Asset --> AssetType : reads
 
 class IncomeEntry {
     +uuid id

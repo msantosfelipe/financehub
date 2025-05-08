@@ -3,7 +3,7 @@ package com.msantosfelipe.financehub.account.ports.output
 import com.msantosfelipe.financehub.account.domain.model.Account
 import java.util.UUID
 
-interface AccountRepository {
+interface AccountRepositoryPort {
     suspend fun create(account: Account): UUID
 
     suspend fun update(account: Account): Account

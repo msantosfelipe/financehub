@@ -3,7 +3,7 @@ package com.msantosfelipe.financehub.account.adapters.output.repository.database
 import com.msantosfelipe.financehub.account.domain.model.Account
 import com.msantosfelipe.financehub.account.ports.output.AccountAlreadyExistsException
 import com.msantosfelipe.financehub.account.ports.output.AccountNotFoundException
-import com.msantosfelipe.financehub.account.ports.output.AccountRepository
+import com.msantosfelipe.financehub.account.ports.output.AccountRepositoryPort
 import io.micronaut.data.exceptions.DataAccessException
 import jakarta.inject.Singleton
 import kotlinx.coroutines.flow.toList
@@ -12,7 +12,7 @@ import java.util.UUID
 @Singleton
 class AccountRepository(
     val repository: AccountPostgresRepository,
-) : AccountRepository {
+) : AccountRepositoryPort {
     override suspend fun create(account: Account): UUID {
         try {
             return repository.save(entity = account).id

@@ -3,13 +3,13 @@ package com.msantosfelipe.financehub.account.domain.usecase
 import com.msantosfelipe.financehub.account.domain.model.Account
 import com.msantosfelipe.financehub.account.domain.model.normalizeAccountName
 import com.msantosfelipe.financehub.account.ports.input.AccountServicePort
-import com.msantosfelipe.financehub.account.ports.output.AccountRepository
+import com.msantosfelipe.financehub.account.ports.output.AccountRepositoryPort
 import jakarta.inject.Singleton
 import java.util.UUID
 
 @Singleton
 class AccountUseCase(
-    private val accountRepository: AccountRepository,
+    private val accountRepository: AccountRepositoryPort,
 ) : AccountServicePort {
     override suspend fun createAccount(account: Account): UUID = accountRepository.create(account)
 

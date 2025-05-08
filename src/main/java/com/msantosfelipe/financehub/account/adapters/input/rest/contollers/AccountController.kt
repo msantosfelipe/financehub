@@ -52,18 +52,17 @@ class AccountController(
     ): Account {
         val account = accountService.getAccountById(uuid)
         return accountService.updateAccount(
-            Account(
-                id = account.id,
-                displayName = account.displayName,
-                bankCode = updateAccountRequest.bankCode,
-                agency = updateAccountRequest.agency,
-                accountNumber = updateAccountRequest.accountNumber,
-                pix = updateAccountRequest.pix,
-                loginUser = updateAccountRequest.loginUser,
-                accountType = updateAccountRequest.accountType,
-                description = updateAccountRequest.useDescription,
-                active = updateAccountRequest.active,
-            ),
+            account =
+                account.copy(
+                    bankCode = updateAccountRequest.bankCode,
+                    agency = updateAccountRequest.agency,
+                    accountNumber = updateAccountRequest.accountNumber,
+                    pix = updateAccountRequest.pix,
+                    loginUser = updateAccountRequest.loginUser,
+                    accountType = updateAccountRequest.accountType,
+                    description = updateAccountRequest.useDescription,
+                    active = updateAccountRequest.active,
+                ),
         )
     }
 
