@@ -195,36 +195,47 @@ InvestmentsEntry --> InvestmentsSnapshot : creates
 
 ```
 
-### Packages design
+### Project architecture
 ````
 financehub/
-├── domain/
-│   ├── model/
-│   │   └── Account.kt
-│   │── usecase/
-│   │   └── AccountUseCase.kt
-├── ports/
-│   ├── in/
-│   │   └── AccountService.kt
-│   ├── out/
-│   │   └── AccountRepository.kt
-│   │   └── AccountClient.kt
-├── adapters/
-│   ├── in/
-│   │   ├── rest/
-│   │   │   └── AccountController.kt
-│   ├── out/
-│   │   ├── repository/
-│   │   │   ├── database/
-│   │   │   │   └── AccountRepositoryImpl.kt
-│   │   ├── external/
-│   │   │   ├── clients/
-│   │   │   │   └── AccountClientImpl.kt
-└── Application.kt
+├── domains/
+│   ├── accounts/
+│   │   ├── adapters/
+│   │   │   ├── input/
+│   │   │   │   ├── rest/
+│   │   │   │   │   └── AccountController.kt
+│   │   │   ├── output/
+│   │   │   │   ├── repository/
+│   │   │   │   │   ├── database/
+│   │   │   │   │   └── AccountRepository.kt
+│   │   ├── domain/
+│   │   │   ├── model/
+│   │   │   │   └── Account.kt
+│   │   │   ├── usecase/
+│   │   │   │   └── AccountUseCase.kt
+│   │   ├── ports/
+│   │   │   ├── input/
+│   │   │   │   └── AccountServicePort.kt
+│   │   │   ├── output/
+│   │   │   │   └── AccountRepositoryPort.kt
+│   ├── objectives/
+│   │   ├── adapters/
+│   │   │   ├── ...
+│   │   ├── domain/
+│   │   │   ├── ...
+│   │   ├── ports/
+│   │   │   ├── ...
+│   ├── assets/
+│   │   ├── adapters/
+│   │   │   ├── ...
+│   │   ├── domain/
+│   │   │   ├── ...
+│   │   ├── ports/
+│   │   │   ├── ...
 ````
 
 - domain/ – Contains the core business logic, including entities and use cases.
-- ports/in/ – Defines the input contracts (interfaces) for the application's use cases.
-- ports/out/ – Declares output contracts for external dependencies such as databases, caches and APIs.
-- adapters/in/ – Implements entry points like REST controllers, CLI commands, or event listeners.
-- adapters/out/ – Implements integrations with external systems such as databases, caches, and APIs.
+- ports/input/ – Defines the input contracts (interfaces) for the application's use cases.
+- ports/output/ – Declares output contracts for external dependencies such as databases, caches and APIs.
+- adapters/input/ – Implements entry points like REST controllers, CLI commands, or event listeners.
+- adapters/output/ – Implements integrations with external systems such as databases, caches, and APIs.
