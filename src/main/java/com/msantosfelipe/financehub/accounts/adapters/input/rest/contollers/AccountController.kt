@@ -1,10 +1,10 @@
 package com.msantosfelipe.financehub.accounts.adapters.input.rest.contollers
 
-import com.msantosfelipe.financehub.account.adapters.input.rest.dto.CreateAccountRequest
-import com.msantosfelipe.financehub.account.adapters.input.rest.dto.UpdateAccountRequest
-import com.msantosfelipe.financehub.account.domain.model.Account
-import com.msantosfelipe.financehub.account.domain.model.AccountType
-import com.msantosfelipe.financehub.account.ports.input.AccountServicePort
+import com.msantosfelipe.financehub.accounts.adapters.input.rest.dto.CreateAccountRequest
+import com.msantosfelipe.financehub.accounts.adapters.input.rest.dto.UpdateAccountRequest
+import com.msantosfelipe.financehub.accounts.domain.model.Account
+import com.msantosfelipe.financehub.accounts.domain.model.AccountType
+import com.msantosfelipe.financehub.accounts.ports.input.AccountServicePort
 import com.msantosfelipe.financehub.commons.adapters.input.rest.dto.ErrorDto
 import com.msantosfelipe.financehub.commons.adapters.input.rest.dto.httpConversionErrorHandler
 import io.micronaut.core.convert.exceptions.ConversionErrorException

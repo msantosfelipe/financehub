@@ -1,8 +1,8 @@
 package com.msantosfelipe.financehub.objectives.adapters.output.repository.database
 
 import com.msantosfelipe.financehub.commons.ports.output.exceptions.GenericNotFoundException
-import com.msantosfelipe.financehub.objective.domain.model.InvestmentsObjective
-import com.msantosfelipe.financehub.objective.ports.output.InvestmentsObjectiveRepositoryPort
+import com.msantosfelipe.financehub.objectives.domain.model.InvestmentsObjective
+import com.msantosfelipe.financehub.objectives.ports.output.InvestmentsObjectiveRepositoryPort
 import jakarta.inject.Singleton
 import kotlinx.coroutines.flow.toList
 import java.util.UUID

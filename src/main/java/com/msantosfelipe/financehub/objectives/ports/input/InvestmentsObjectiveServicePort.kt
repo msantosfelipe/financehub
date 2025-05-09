@@ -1,6 +1,6 @@
 package com.msantosfelipe.financehub.objectives.ports.input
 
-import com.msantosfelipe.financehub.objective.domain.model.InvestmentsObjective
+import com.msantosfelipe.financehub.objectives.domain.model.InvestmentsObjective
 import java.util.UUID
 
 interface InvestmentsObjectiveServicePort {

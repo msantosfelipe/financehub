@@ -1,6 +1,6 @@
 package com.msantosfelipe.financehub.objectives.adapters.output.repository.database
 
-import com.msantosfelipe.financehub.objective.domain.model.InvestmentsObjective
+import com.msantosfelipe.financehub.objectives.domain.model.InvestmentsObjective
 import io.micronaut.data.jdbc.annotation.JdbcRepository
 import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.repository.kotlin.CoroutineCrudRepository

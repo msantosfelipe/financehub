@@ -1,7 +1,7 @@
 package com.msantosfelipe.financehub.objectives.adapters.input.rest.dto
 
-import com.msantosfelipe.financehub.objective.domain.model.InvestmentsObjectiveHorizon
-import com.msantosfelipe.financehub.objective.domain.model.InvestmentsObjectiveStatus
+import com.msantosfelipe.financehub.objectives.domain.model.InvestmentsObjectiveHorizon
+import com.msantosfelipe.financehub.objectives.domain.model.InvestmentsObjectiveStatus
 import io.micronaut.serde.annotation.Serdeable
 import java.time.LocalDate
 

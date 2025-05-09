@@ -1,8 +1,8 @@
 package com.msantosfelipe.financehub.objectives.domain.usecase
 
-import com.msantosfelipe.financehub.objective.domain.model.InvestmentsObjective
-import com.msantosfelipe.financehub.objective.ports.input.InvestmentsObjectiveServicePort
-import com.msantosfelipe.financehub.objective.ports.output.InvestmentsObjectiveRepositoryPort
+import com.msantosfelipe.financehub.objectives.domain.model.InvestmentsObjective
+import com.msantosfelipe.financehub.objectives.ports.input.InvestmentsObjectiveServicePort
+import com.msantosfelipe.financehub.objectives.ports.output.InvestmentsObjectiveRepositoryPort
 import jakarta.inject.Singleton
 import java.util.UUID
 

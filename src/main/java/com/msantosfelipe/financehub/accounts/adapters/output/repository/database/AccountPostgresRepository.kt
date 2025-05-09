@@ -1,6 +1,6 @@
 package com.msantosfelipe.financehub.accounts.adapters.output.repository.database
 
-import com.msantosfelipe.financehub.account.domain.model.Account
+import com.msantosfelipe.financehub.accounts.domain.model.Account
 import io.micronaut.data.jdbc.annotation.JdbcRepository
 import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.repository.kotlin.CoroutineCrudRepository
