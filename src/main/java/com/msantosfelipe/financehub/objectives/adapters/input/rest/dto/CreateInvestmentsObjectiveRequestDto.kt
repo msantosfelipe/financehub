@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.objective.adapters.input.rest.dto
+package com.msantosfelipe.financehub.objectives.adapters.input.rest.dto
 
 import com.msantosfelipe.financehub.objective.domain.model.InvestmentsObjectiveHorizon
 import com.msantosfelipe.financehub.objective.domain.model.InvestmentsObjectiveStatus

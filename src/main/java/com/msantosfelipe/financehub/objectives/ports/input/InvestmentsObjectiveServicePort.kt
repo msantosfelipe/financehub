@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.objective.ports.input
+package com.msantosfelipe.financehub.objectives.ports.input
 
 import com.msantosfelipe.financehub.objective.domain.model.InvestmentsObjective
 import java.util.UUID

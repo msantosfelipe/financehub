@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.objective.adapters.output.repository.database
+package com.msantosfelipe.financehub.objectives.adapters.output.repository.database
 
 import com.msantosfelipe.financehub.commons.ports.output.exceptions.GenericNotFoundException
 import com.msantosfelipe.financehub.objective.domain.model.InvestmentsObjective

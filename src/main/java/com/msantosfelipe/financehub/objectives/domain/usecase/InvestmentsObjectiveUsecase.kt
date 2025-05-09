@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.objective.domain.usecase
+package com.msantosfelipe.financehub.objectives.domain.usecase
 
 import com.msantosfelipe.financehub.objective.domain.model.InvestmentsObjective
 import com.msantosfelipe.financehub.objective.ports.input.InvestmentsObjectiveServicePort

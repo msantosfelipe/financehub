@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.objective.adapters.input.rest.controllers
+package com.msantosfelipe.financehub.objectives.adapters.input.rest.controllers
 
 import com.msantosfelipe.financehub.objective.adapters.input.rest.dto.CreateInvestmentsObjectiveRequestDto
 import com.msantosfelipe.financehub.objective.adapters.input.rest.dto.UpdateInvestmentsObjectiveRequestDto

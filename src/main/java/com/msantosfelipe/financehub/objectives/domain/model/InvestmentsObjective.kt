@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.objective.domain.model
+package com.msantosfelipe.financehub.objectives.domain.model
 
 import io.micronaut.data.annotation.Id
 import io.micronaut.data.annotation.MappedEntity
