@@ -4,7 +4,7 @@ import com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.dto.C
 import com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.dto.UpdateInvestmentsObjectiveRequestDto
 import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjective
 import com.msantosfelipe.financehub.domains.objectives.ports.input.InvestmentsObjectiveServicePort
-import com.msantosfelipe.financehub.shared.exceptions.repository.GenericNotFoundException
+import com.msantosfelipe.financehub.shared.exceptions.GenericNotFoundException
 import com.msantosfelipe.financehub.shared.exceptions.rest.dto.ErrorDto
 import io.micronaut.core.convert.exceptions.ConversionErrorException
 import io.micronaut.http.HttpRequest

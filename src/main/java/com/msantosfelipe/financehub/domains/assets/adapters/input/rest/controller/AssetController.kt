@@ -3,8 +3,8 @@ package com.msantosfelipe.financehub.domains.assets.adapters.input.rest.controll
 import com.msantosfelipe.financehub.domains.assets.adapters.input.rest.dto.CreateAssetRequest
 import com.msantosfelipe.financehub.domains.assets.domain.model.Asset
 import com.msantosfelipe.financehub.domains.assets.ports.input.AssetServicePort
-import com.msantosfelipe.financehub.shared.exceptions.repository.GenericAlreadyExistsException
-import com.msantosfelipe.financehub.shared.exceptions.repository.GenericNotFoundException
+import com.msantosfelipe.financehub.shared.exceptions.GenericAlreadyExistsException
+import com.msantosfelipe.financehub.shared.exceptions.GenericNotFoundException
 import com.msantosfelipe.financehub.shared.exceptions.rest.dto.ErrorDto
 import io.micronaut.core.convert.exceptions.ConversionErrorException
 import io.micronaut.http.HttpRequest

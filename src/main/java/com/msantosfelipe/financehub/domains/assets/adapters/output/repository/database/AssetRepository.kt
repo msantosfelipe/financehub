@@ -2,8 +2,8 @@ package com.msantosfelipe.financehub.domains.assets.adapters.output.repository.d
 
 import com.msantosfelipe.financehub.domains.assets.domain.model.Asset
 import com.msantosfelipe.financehub.domains.assets.ports.output.AssetRepositoryPort
-import com.msantosfelipe.financehub.shared.exceptions.repository.GenericAlreadyExistsException
-import com.msantosfelipe.financehub.shared.exceptions.repository.GenericNotFoundException
+import com.msantosfelipe.financehub.shared.exceptions.GenericAlreadyExistsException
+import com.msantosfelipe.financehub.shared.exceptions.GenericNotFoundException
 import io.micronaut.data.exceptions.DataAccessException
 import jakarta.inject.Singleton
 import kotlinx.coroutines.flow.toList

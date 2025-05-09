@@ -2,7 +2,7 @@ package com.msantosfelipe.financehub.domains.objectives.adapters.output.reposito
 
 import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjective
 import com.msantosfelipe.financehub.domains.objectives.ports.output.InvestmentsObjectiveRepositoryPort
-import com.msantosfelipe.financehub.shared.exceptions.repository.GenericNotFoundException
+import com.msantosfelipe.financehub.shared.exceptions.GenericNotFoundException
 import jakarta.inject.Singleton
 import kotlinx.coroutines.flow.toList
 import java.util.UUID
