@@ -14,7 +14,3 @@ interface AccountRepositoryPort {
 
     suspend fun getByName(name: String): Account
 }
-
-class AccountNotFoundException(message: String?) : RuntimeException(message)
-
-class AccountAlreadyExistsException(message: String?) : RuntimeException(message)

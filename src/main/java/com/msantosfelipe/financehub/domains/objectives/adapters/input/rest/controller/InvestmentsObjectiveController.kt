@@ -1,11 +1,11 @@
-package com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.controllers
+package com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.controller
 
 import com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.dto.CreateInvestmentsObjectiveRequestDto
 import com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.dto.UpdateInvestmentsObjectiveRequestDto
 import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjective
 import com.msantosfelipe.financehub.domains.objectives.ports.input.InvestmentsObjectiveServicePort
+import com.msantosfelipe.financehub.shared.exceptions.repository.GenericNotFoundException
 import com.msantosfelipe.financehub.shared.exceptions.rest.dto.ErrorDto
-import com.msantosfelipe.financehub.shared.exceptions.rest.httpConversionErrorHandler
 import io.micronaut.core.convert.exceptions.ConversionErrorException
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
@@ -67,8 +67,20 @@ class InvestmentsObjectiveController(
         request: HttpRequest<*>,
         ex: ConversionErrorException,
     ): HttpResponse<ErrorDto> {
+        val message = ex.cause?.message ?: ex.message ?: "Unknown conversion error"
         return HttpResponse.badRequest(
-            httpConversionErrorHandler(ex),
+            ErrorDto("ConversionError. $message"),
+        )
+    }
+
+    @Error()
+    fun handleNotFoundException(
+        request: HttpRequest<*>,
+        ex: GenericNotFoundException,
+    ): HttpResponse<ErrorDto> {
+        val message = ex.cause?.message ?: ex.message ?: "Not found error"
+        return HttpResponse.badRequest(
+            ErrorDto(message),
         )
     }
 }

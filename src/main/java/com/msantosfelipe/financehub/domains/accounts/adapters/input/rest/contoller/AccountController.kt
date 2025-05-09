@@ -1,12 +1,13 @@
-package com.msantosfelipe.financehub.domains.accounts.adapters.input.rest.contollers
+package com.msantosfelipe.financehub.domains.accounts.adapters.input.rest.contoller
 
 import com.msantosfelipe.financehub.domains.accounts.adapters.input.rest.dto.CreateAccountRequest
 import com.msantosfelipe.financehub.domains.accounts.adapters.input.rest.dto.UpdateAccountRequest
 import com.msantosfelipe.financehub.domains.accounts.domain.model.Account
 import com.msantosfelipe.financehub.domains.accounts.domain.model.AccountType
 import com.msantosfelipe.financehub.domains.accounts.ports.input.AccountServicePort
+import com.msantosfelipe.financehub.shared.exceptions.repository.GenericAlreadyExistsException
+import com.msantosfelipe.financehub.shared.exceptions.repository.GenericNotFoundException
 import com.msantosfelipe.financehub.shared.exceptions.rest.dto.ErrorDto
-import com.msantosfelipe.financehub.shared.exceptions.rest.httpConversionErrorHandler
 import io.micronaut.core.convert.exceptions.ConversionErrorException
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
@@ -81,8 +82,31 @@ class AccountController(
         request: HttpRequest<*>,
         ex: ConversionErrorException,
     ): HttpResponse<ErrorDto> {
+        val message = ex.cause?.message ?: ex.message ?: "Unknown conversion error"
         return HttpResponse.badRequest(
-            httpConversionErrorHandler(ex),
+            ErrorDto("ConversionError. $message"),
+        )
+    }
+
+    @Error()
+    fun handleAlreadyExistsException(
+        request: HttpRequest<*>,
+        ex: GenericAlreadyExistsException,
+    ): HttpResponse<ErrorDto> {
+        val message = ex.cause?.message ?: ex.message ?: "Already exists error"
+        return HttpResponse.badRequest(
+            ErrorDto(message),
+        )
+    }
+
+    @Error()
+    fun handleNotFoundException(
+        request: HttpRequest<*>,
+        ex: GenericNotFoundException,
+    ): HttpResponse<ErrorDto> {
+        val message = ex.cause?.message ?: ex.message ?: "Not found error"
+        return HttpResponse.badRequest(
+            ErrorDto(message),
         )
     }
 }

@@ -1,9 +1,9 @@
 package com.msantosfelipe.financehub.domains.accounts.adapters.output.repository.database
 
 import com.msantosfelipe.financehub.domains.accounts.domain.model.Account
-import com.msantosfelipe.financehub.domains.accounts.ports.output.AccountAlreadyExistsException
-import com.msantosfelipe.financehub.domains.accounts.ports.output.AccountNotFoundException
 import com.msantosfelipe.financehub.domains.accounts.ports.output.AccountRepositoryPort
+import com.msantosfelipe.financehub.shared.exceptions.repository.GenericAlreadyExistsException
+import com.msantosfelipe.financehub.shared.exceptions.repository.GenericNotFoundException
 import io.micronaut.data.exceptions.DataAccessException
 import jakarta.inject.Singleton
 import kotlinx.coroutines.flow.toList
@@ -13,12 +13,18 @@ import java.util.UUID
 class AccountRepository(
     val repository: AccountPostgresRepository,
 ) : AccountRepositoryPort {
+    val domainType = "Account"
+
     override suspend fun create(account: Account): UUID {
         try {
             return repository.save(entity = account).id
         } catch (e: DataAccessException) {
             if (e.message?.contains("duplicate key value") == true) {
-                throw AccountAlreadyExistsException("Account with name '${account.name}' already exists.")
+                throw GenericAlreadyExistsException(
+                    domainType = domainType,
+                    field = "name",
+                    value = account.name,
+                )
             } else {
                 throw e
             }
@@ -30,12 +36,16 @@ class AccountRepository(
     override suspend fun getAll(): List<Account> = repository.findAll().toList()
 
     override suspend fun getById(id: UUID): Account =
-        repository.findById(id) ?: throw AccountNotFoundException(
-            "Account with name $id not found",
+        repository.findById(id) ?: throw GenericNotFoundException(
+            domainType = domainType,
+            field = "id",
+            value = id.toString(),
         )
 
     override suspend fun getByName(name: String): Account =
-        repository.findByName(name) ?: throw AccountNotFoundException(
-            "Account with name $name not found",
+        repository.findByName(name) ?: throw GenericNotFoundException(
+            domainType = domainType,
+            field = "name",
+            value = name,
         )
 }

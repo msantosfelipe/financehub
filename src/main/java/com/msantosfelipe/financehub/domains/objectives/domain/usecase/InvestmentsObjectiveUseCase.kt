@@ -7,7 +7,7 @@ import jakarta.inject.Singleton
 import java.util.UUID
 
 @Singleton
-class InvestmentsObjectiveUsecase(
+class InvestmentsObjectiveUseCase(
     val objectiveRepository: InvestmentsObjectiveRepositoryPort,
 ) : InvestmentsObjectiveServicePort {
     override suspend fun createObjective(objective: InvestmentsObjective): UUID = objectiveRepository.create(objective)
