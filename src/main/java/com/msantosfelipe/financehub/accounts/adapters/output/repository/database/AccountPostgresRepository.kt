@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.account.adapters.output.repository.database
+package com.msantosfelipe.financehub.accounts.adapters.output.repository.database
 
 import com.msantosfelipe.financehub.account.domain.model.Account
 import io.micronaut.data.jdbc.annotation.JdbcRepository

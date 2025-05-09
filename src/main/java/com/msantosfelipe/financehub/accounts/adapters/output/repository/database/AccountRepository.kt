@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.account.adapters.output.repository.database
+package com.msantosfelipe.financehub.accounts.adapters.output.repository.database
 
 import com.msantosfelipe.financehub.account.domain.model.Account
 import com.msantosfelipe.financehub.account.ports.output.AccountAlreadyExistsException

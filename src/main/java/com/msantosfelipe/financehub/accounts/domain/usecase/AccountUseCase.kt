@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.account.domain.usecase
+package com.msantosfelipe.financehub.accounts.domain.usecase
 
 import com.msantosfelipe.financehub.account.domain.model.Account
 import com.msantosfelipe.financehub.account.domain.model.normalizeAccountName

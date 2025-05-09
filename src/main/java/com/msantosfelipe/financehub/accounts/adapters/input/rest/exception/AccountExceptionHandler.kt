@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.account.adapters.input.rest.exception
+package com.msantosfelipe.financehub.accounts.adapters.input.rest.exception
 
 import com.msantosfelipe.financehub.account.ports.output.AccountAlreadyExistsException
 import com.msantosfelipe.financehub.account.ports.output.AccountNotFoundException

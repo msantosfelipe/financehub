@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.account.ports.output
+package com.msantosfelipe.financehub.accounts.ports.output
 
 import com.msantosfelipe.financehub.account.domain.model.Account
 import java.util.UUID

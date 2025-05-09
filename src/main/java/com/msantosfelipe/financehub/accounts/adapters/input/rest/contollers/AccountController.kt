@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.account.adapters.input.rest.contollers
+package com.msantosfelipe.financehub.accounts.adapters.input.rest.contollers
 
 import com.msantosfelipe.financehub.account.adapters.input.rest.dto.CreateAccountRequest
 import com.msantosfelipe.financehub.account.adapters.input.rest.dto.UpdateAccountRequest
