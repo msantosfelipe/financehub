@@ -4,6 +4,13 @@ micronaut:
   server:
     port: 8080
     context-path: /financehub
+  http:
+    services:
+      alpha-vantage:
+        url: "https://www.alphavantage.co"
+        read-timeout: 10s
+        exception-on-error-status: true
+        apikey: ${ALPHA_VANTAGE_API_KEY:fake}
 
 flyway:
   datasources:
@@ -20,3 +27,4 @@ datasources:
     url: jdbc:postgresql://localhost:5432/financehub
     username: root
     password: root
+
