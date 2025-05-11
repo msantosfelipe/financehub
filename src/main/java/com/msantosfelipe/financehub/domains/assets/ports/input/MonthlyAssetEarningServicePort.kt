@@ -5,4 +5,6 @@ import java.util.UUID
 
 interface MonthlyAssetEarningServicePort {
     suspend fun createOrUpdateEarningEntry(assetEarning: MonthlyAssetEarning): UUID
+
+    suspend fun listEarningsByAsset(assetId: UUID): List<MonthlyAssetEarning>
 }

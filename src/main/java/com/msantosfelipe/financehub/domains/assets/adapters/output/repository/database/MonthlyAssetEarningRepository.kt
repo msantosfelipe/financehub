@@ -18,4 +18,6 @@ class MonthlyAssetEarningRepository(
         assetId: UUID,
         referenceDate: LocalDate,
     ): MonthlyAssetEarning? = repository.findByAssetIdAndReferenceDate(assetId, referenceDate)
+
+    override suspend fun listEarningsByAsset(assetId: UUID): List<MonthlyAssetEarning> = repository.findByAssetId(assetId)
 }

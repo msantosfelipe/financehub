@@ -27,4 +27,7 @@ class MonthlyAssetEarningUseCase(
             )
         }
     }
+
+    override suspend fun listEarningsByAsset(assetId: UUID): List<MonthlyAssetEarning> =
+        monthlyAssetEarningRepository.listEarningsByAsset(assetId)
 }

@@ -60,6 +60,15 @@ class AssetController(
         )
     }
 
+    @Get("/earnings/ticker/{ticker}")
+    @Produces(MediaType.APPLICATION_JSON)
+    suspend fun listEarningsByAsset(
+        @PathVariable ticker: String,
+    ): List<MonthlyAssetEarning> {
+        val asset = assetService.getAssetByTicker(ticker)
+        return monthlyAssetEarningService.listEarningsByAsset(asset.id)
+    }
+
     @Error(global = true)
     fun handleConversionError(
         request: HttpRequest<*>,

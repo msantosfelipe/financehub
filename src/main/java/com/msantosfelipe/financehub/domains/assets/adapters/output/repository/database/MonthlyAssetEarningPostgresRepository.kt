@@ -15,4 +15,6 @@ interface MonthlyAssetEarningPostgresRepository : CoroutineCrudRepository<Monthl
         assetId: UUID,
         referenceDate: LocalDate,
     ): MonthlyAssetEarning?
+
+    suspend fun findByAssetId(assetId: UUID): List<MonthlyAssetEarning>
 }

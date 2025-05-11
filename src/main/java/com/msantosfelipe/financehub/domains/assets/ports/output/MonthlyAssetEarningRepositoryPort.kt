@@ -13,4 +13,6 @@ interface MonthlyAssetEarningRepositoryPort {
         assetId: UUID,
         referenceDate: LocalDate,
     ): MonthlyAssetEarning?
+
+    suspend fun listEarningsByAsset(assetId: UUID): List<MonthlyAssetEarning>
 }
