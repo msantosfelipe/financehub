@@ -97,6 +97,7 @@ class AssetEarnings {
     +string notes
 
     +createOrUpdateEarningEntry(earningEntry) uuid
+    +listEarningsByAsset(asset) List~AssetEarnings~
 }
 Asset --> AssetEarnings : reads
 Asset --> AssetType : reads
@@ -202,36 +203,36 @@ financehub/
 │   ├── accounts/
 │   │   ├── adapters/
 │   │   │   ├── input/
-│   │   │   │   ├── rest/
-│   │   │   │   │   └── AccountController.kt
-│   │   │   ├── output/
-│   │   │   │   ├── repository/
-│   │   │   │   │   ├── database/
-│   │   │   │   │   └── AccountRepository.kt
+│   │   │   │   └── rest/
+│   │   │   │       └── AccountController.kt
+│   │   │   └── output/
+│   │   │       └── repository/
+│   │   │           └── database/
+│   │   │               └── AccountRepository.kt
 │   │   ├── domain/
 │   │   │   ├── model/
 │   │   │   │   └── Account.kt
-│   │   │   ├── usecase/
-│   │   │   │   └── AccountUseCase.kt
-│   │   ├── ports/
-│   │   │   ├── input/
-│   │   │   │   └── AccountServicePort.kt
-│   │   │   ├── output/
-│   │   │   │   └── AccountRepositoryPort.kt
+│   │   │   └── usecase/
+│   │   │       └── AccountUseCase.kt
+│   │   └── ports/
+│   │       ├── input/
+│   │       │   └── AccountServicePort.kt
+│   │       └── output/
+│   │           └── AccountRepositoryPort.kt
 │   ├── objectives/
 │   │   ├── adapters/
-│   │   │   ├── ...
+│   │   │   └── ...
 │   │   ├── domain/
-│   │   │   ├── ...
-│   │   ├── ports/
-│   │   │   ├── ...
+│   │   │   └── ...
+│   │   └── ports/
+│   │       └── ...
 │   ├── assets/
 │   │   ├── adapters/
-│   │   │   ├── ...
+│   │   │   └── ...
 │   │   ├── domain/
-│   │   │   ├── ...
-│   │   ├── ports/
-│   │   │   ├── ...
+│   │   │   └── ...
+│   │   └── ports/
+│   │       └── ...
 ````
 
 - domain/ – Contains the core business logic, including entities and use cases.
