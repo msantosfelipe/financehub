@@ -13,12 +13,11 @@ data class Asset(
     val ticker: String,
     val name: String,
     val type: AssetType,
-    val country: String,
+    val region: String,
 )
 
 enum class AssetType {
     STOCK,
     REIT,
     ETF,
-    BOND,
 }

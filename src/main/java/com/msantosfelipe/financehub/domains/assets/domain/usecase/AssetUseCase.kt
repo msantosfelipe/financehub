@@ -1,29 +1,27 @@
 package com.msantosfelipe.financehub.domains.assets.domain.usecase
 
-import com.msantosfelipe.financehub.domains.assets.adapters.output.repository.external.alphavantage.client.AlphaVantageClient
+import com.msantosfelipe.financehub.domains.assets.adapters.output.repository.external.alphavantage.AlphaVantageRepository
 import com.msantosfelipe.financehub.domains.assets.domain.model.Asset
 import com.msantosfelipe.financehub.domains.assets.domain.model.AssetType
 import com.msantosfelipe.financehub.domains.assets.ports.input.AssetServicePort
 import com.msantosfelipe.financehub.domains.assets.ports.output.AssetRepositoryPort
-import io.micronaut.context.annotation.Value
 import jakarta.inject.Singleton
 import java.util.UUID
 
 @Singleton
 class AssetUseCase(
     val assetRepository: AssetRepositoryPort,
-    val alphaVantageClient: AlphaVantageClient,
-    @Value("\${micronaut.http.services.alpha-vantage.apikey}") private val apiKey: String,
+    val alphaVantageRepository: AlphaVantageRepository,
 ) : AssetServicePort {
     override suspend fun createAsset(ticker: String): UUID {
-        val alphaVantage = alphaVantageClient.tickerSearch(ticker = ticker, apiKey = apiKey)
+        val alphaVantage = alphaVantageRepository.tickerSearch(ticker = ticker)
 
         return assetRepository.create(
             Asset(
                 ticker = ticker,
-                name = alphaVantage.bestMatches.firstOrNull()?.name ?: "Unknown",
-                type = AssetType.STOCK,
-                country = "TODO",
+                name = alphaVantage.name,
+                type = convertAssetTypeFromAlphaVantage(alphaVantage.type),
+                region = alphaVantage.region,
             ),
         )
     }
@@ -31,4 +29,12 @@ class AssetUseCase(
     override suspend fun getAllAssets(): List<Asset> = assetRepository.getAll()
 
     override suspend fun getAssetByTicker(ticker: String): Asset = assetRepository.getByTicker(ticker)
+
+    fun convertAssetTypeFromAlphaVantage(type: String): AssetType =
+        when (type.lowercase()) {
+            "equity" -> AssetType.STOCK
+            "mutual fund" -> AssetType.REIT
+            "etf" -> AssetType.ETF
+            else -> throw IllegalArgumentException("Unknown asset type from Alpha Vantage: $type")
+        }
 }
