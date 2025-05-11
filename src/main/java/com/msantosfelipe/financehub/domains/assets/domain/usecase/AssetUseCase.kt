@@ -35,6 +35,6 @@ class AssetUseCase(
             "equity" -> AssetType.STOCK
             "mutual fund" -> AssetType.REIT
             "etf" -> AssetType.ETF
-            else -> throw IllegalArgumentException("Unknown asset type from Alpha Vantage: $type")
+            else -> AssetType.UNKNOWN
         }
 }

@@ -2,8 +2,8 @@ package com.msantosfelipe.financehub.domains.objectives.domain.model
 
 import io.micronaut.data.annotation.Id
 import io.micronaut.data.annotation.MappedEntity
+import io.micronaut.data.annotation.MappedProperty
 import io.micronaut.serde.annotation.Serdeable
-import jakarta.persistence.Column
 import java.time.LocalDate
 import java.util.UUID
 
@@ -12,7 +12,7 @@ import java.util.UUID
 data class InvestmentsObjective(
     @field:Id
     val id: UUID = UUID.randomUUID(),
-    @Column(name = "objective_horizon")
+    @MappedProperty("objective_horizon")
     val horizon: InvestmentsObjectiveHorizon,
     val estimatedDate: LocalDate? = null,
     val createdDate: LocalDate,

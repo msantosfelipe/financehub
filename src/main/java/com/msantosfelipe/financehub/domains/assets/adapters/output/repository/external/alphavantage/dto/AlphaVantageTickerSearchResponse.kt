@@ -5,11 +5,11 @@ import io.micronaut.serde.annotation.Serdeable
 
 @Serdeable
 class AlphaVantageTickerSearchResponse(
-    val bestMatches: List<TickerSearchBestMatches>,
+    val bestMatches: List<TickerSearchBestMatch>,
 )
 
 @Serdeable
-data class TickerSearchBestMatches(
+data class TickerSearchBestMatch(
     @JsonProperty("1. symbol") val symbol: String,
     @JsonProperty("2. name") val name: String,
     @JsonProperty("3. type") val type: String,

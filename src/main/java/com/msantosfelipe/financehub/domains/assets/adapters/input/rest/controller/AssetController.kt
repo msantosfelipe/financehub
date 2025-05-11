@@ -1,8 +1,11 @@
 package com.msantosfelipe.financehub.domains.assets.adapters.input.rest.controller
 
+import com.msantosfelipe.financehub.domains.assets.adapters.input.rest.dto.AssetEarningRequest
 import com.msantosfelipe.financehub.domains.assets.adapters.input.rest.dto.CreateAssetRequest
 import com.msantosfelipe.financehub.domains.assets.domain.model.Asset
+import com.msantosfelipe.financehub.domains.assets.domain.model.MonthlyAssetEarning
 import com.msantosfelipe.financehub.domains.assets.ports.input.AssetServicePort
+import com.msantosfelipe.financehub.domains.assets.ports.input.MonthlyAssetEarningServicePort
 import com.msantosfelipe.financehub.shared.exceptions.GenericAlreadyExistsException
 import com.msantosfelipe.financehub.shared.exceptions.GenericNotFoundException
 import com.msantosfelipe.financehub.shared.exceptions.rest.dto.ErrorDto
@@ -22,6 +25,7 @@ import java.util.UUID
 @Controller("api/v1/assets")
 class AssetController(
     val assetService: AssetServicePort,
+    val monthlyAssetEarningService: MonthlyAssetEarningServicePort,
 ) {
     @Post
     @Produces(MediaType.APPLICATION_JSON)
@@ -38,6 +42,22 @@ class AssetController(
     suspend fun getAssetByTicker(
         @PathVariable ticker: String,
     ): Asset = assetService.getAssetByTicker(ticker)
+
+    @Post("/earnings")
+    @Produces(MediaType.APPLICATION_JSON)
+    suspend fun createOrUpdateEarning(
+        @Body assetEarningRequest: AssetEarningRequest,
+    ): UUID {
+        val asset = assetService.getAssetByTicker(assetEarningRequest.ticker)
+        return monthlyAssetEarningService.createOrUpdateEarningEntry(
+            MonthlyAssetEarning(
+                assetId = asset.id,
+                amountReceived = assetEarningRequest.amountReceived,
+                referenceDate = assetEarningRequest.referenceDate,
+                notes = assetEarningRequest.notes,
+            ),
+        )
+    }
 
     @Error(global = true)
     fun handleConversionError(
