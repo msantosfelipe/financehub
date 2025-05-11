@@ -13,7 +13,7 @@ class MonthlyAssetEarningUseCase(
     override suspend fun createOrUpdateEarningEntry(assetEarning: MonthlyAssetEarning): UUID {
         val existingEarning =
             monthlyAssetEarningRepository.findByAssetIdAndReferenceDate(
-                assetId = assetEarning.id,
+                assetId = assetEarning.assetId,
                 referenceDate = assetEarning.referenceDate,
             )
         return if (existingEarning == null) {

@@ -20,6 +20,7 @@ import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.Produces
+import java.time.YearMonth
 import java.util.UUID
 
 @Controller("api/v1/assets")
@@ -53,7 +54,7 @@ class AssetController(
             MonthlyAssetEarning(
                 assetId = asset.id,
                 amountReceived = assetEarningRequest.amountReceived,
-                referenceDate = assetEarningRequest.referenceDate,
+                referenceDate = YearMonth.parse(assetEarningRequest.referenceDate).atEndOfMonth(),
                 notes = assetEarningRequest.notes,
             ),
         )
