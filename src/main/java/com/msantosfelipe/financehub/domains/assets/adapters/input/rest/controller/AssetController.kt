@@ -3,8 +3,7 @@ package com.msantosfelipe.financehub.domains.assets.adapters.input.rest.controll
 import com.msantosfelipe.financehub.domains.assets.adapters.input.rest.dto.AssetEarningRequest
 import com.msantosfelipe.financehub.domains.assets.adapters.input.rest.dto.CreateAssetRequest
 import com.msantosfelipe.financehub.domains.assets.domain.model.Asset
-import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarningReport
-import com.msantosfelipe.financehub.domains.assets.domain.model.GroupedEarningReport
+import com.msantosfelipe.financehub.domains.assets.domain.model.EarningGroupByMonth
 import com.msantosfelipe.financehub.domains.assets.domain.model.MonthlyAssetEarning
 import com.msantosfelipe.financehub.domains.assets.ports.input.AssetServicePort
 import com.msantosfelipe.financehub.domains.assets.ports.input.MonthlyAssetEarningServicePort
@@ -81,7 +80,7 @@ class AssetController(
     suspend fun listEarningsByDateRange(
         @QueryValue initDate: String,
         @QueryValue endDate: String?,
-    ): List<GroupedEarningReport> {
+    ): List<EarningGroupByMonth> {
         fun parseDates(
             initDate: String,
             endDate: String?,

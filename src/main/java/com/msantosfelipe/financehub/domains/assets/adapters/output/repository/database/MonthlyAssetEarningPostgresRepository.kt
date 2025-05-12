@@ -21,13 +21,17 @@ interface MonthlyAssetEarningPostgresRepository : CoroutineCrudRepository<Monthl
 
     @Query(
         "SELECT " +
-                "TO_CHAR(e.reference_date, 'YYYY-MM') AS reference_date, " +
-                "a.ticker, " +
-                "e.total_amount_received " +
-                "FROM asset_earnings e " +
-                "INNER JOIN assets a ON e.asset_id = a.id " +
-                "WHERE e.reference_date BETWEEN :initDate AND :endDate " +
-                "ORDER BY reference_date, a.ticker"
+            "TO_CHAR(e.reference_date, 'YYYY-MM') AS reference_date, " +
+            "a.type AS asset_type," +
+            "a.ticker, " +
+            "e.total_amount_received " +
+            "FROM asset_earnings e " +
+            "INNER JOIN assets a ON e.asset_id = a.id " +
+            "WHERE e.reference_date BETWEEN :initDate AND :endDate " +
+            "ORDER BY reference_date, a.type, a.ticker",
     )
-    suspend fun listEarningsByDateRange(initDate: LocalDate, endDate: LocalDate): List<AssetEarningReport>
+    suspend fun listEarningsByDateRange(
+        initDate: LocalDate,
+        endDate: LocalDate,
+    ): List<AssetEarningReport>
 }

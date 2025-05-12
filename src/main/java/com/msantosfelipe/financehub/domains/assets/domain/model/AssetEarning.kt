@@ -25,18 +25,19 @@ data class MonthlyAssetEarning(
 @Serdeable
 data class AssetEarningReport(
     val referenceDate: String,
+    val assetType: AssetType,
     val ticker: String,
     var totalAmountReceived: BigDecimal,
 )
 
 @Serdeable
-data class GroupedEarningReport(
+data class EarningGroupByMonth(
     val date: String,
-    val earnings: List<AssetEarningItem>
+    val earnings: Map<AssetType, List<EarningItem>>,
 )
 
 @Serdeable
-data class AssetEarningItem(
+data class EarningItem(
     val ticker: String,
-    val amount: BigDecimal
+    val amount: String,
 )

@@ -17,5 +17,8 @@ interface MonthlyAssetEarningRepositoryPort {
 
     suspend fun listEarningsByAsset(assetId: UUID): List<MonthlyAssetEarning>
 
-    suspend fun listEarningsByDateRange(initDate: LocalDate, endDate: LocalDate): List<AssetEarningReport>
+    suspend fun listEarningsByDateRange(
+        initDate: LocalDate,
+        endDate: LocalDate,
+    ): List<AssetEarningReport>
 }
