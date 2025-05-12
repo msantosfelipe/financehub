@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.assets.adapters.output.repository.database
 
+import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarningReport
 import com.msantosfelipe.financehub.domains.assets.domain.model.MonthlyAssetEarning
 import io.micronaut.data.annotation.Query
 import io.micronaut.data.jdbc.annotation.JdbcRepository
@@ -17,4 +18,16 @@ interface MonthlyAssetEarningPostgresRepository : CoroutineCrudRepository<Monthl
     ): MonthlyAssetEarning?
 
     suspend fun findByAssetId(assetId: UUID): List<MonthlyAssetEarning>
+
+    @Query(
+        "SELECT " +
+                "TO_CHAR(e.reference_date, 'YYYY-MM') AS reference_date, " +
+                "a.ticker, " +
+                "e.total_amount_received " +
+                "FROM asset_earnings e " +
+                "INNER JOIN assets a ON e.asset_id = a.id " +
+                "WHERE e.reference_date BETWEEN :initDate AND :endDate " +
+                "ORDER BY reference_date, a.ticker"
+    )
+    suspend fun listEarningsByDateRange(initDate: LocalDate, endDate: LocalDate): List<AssetEarningReport>
 }

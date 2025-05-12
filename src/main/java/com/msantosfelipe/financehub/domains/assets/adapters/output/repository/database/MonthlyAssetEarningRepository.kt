@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.assets.adapters.output.repository.database
 
+import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarningReport
 import com.msantosfelipe.financehub.domains.assets.domain.model.MonthlyAssetEarning
 import com.msantosfelipe.financehub.domains.assets.ports.output.MonthlyAssetEarningRepositoryPort
 import jakarta.inject.Singleton
@@ -20,4 +21,10 @@ class MonthlyAssetEarningRepository(
     ): MonthlyAssetEarning? = repository.findByAssetIdAndReferenceDate(assetId, referenceDate)
 
     override suspend fun listEarningsByAsset(assetId: UUID): List<MonthlyAssetEarning> = repository.findByAssetId(assetId)
+    override suspend fun listEarningsByDateRange(
+        initDate: LocalDate,
+        endDate: LocalDate
+    ): List<AssetEarningReport> =
+        repository.listEarningsByDateRange(initDate, endDate)
+
 }

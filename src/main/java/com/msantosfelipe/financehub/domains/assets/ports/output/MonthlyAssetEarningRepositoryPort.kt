@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.assets.ports.output
 
+import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarningReport
 import com.msantosfelipe.financehub.domains.assets.domain.model.MonthlyAssetEarning
 import java.time.LocalDate
 import java.util.UUID
@@ -15,4 +16,6 @@ interface MonthlyAssetEarningRepositoryPort {
     ): MonthlyAssetEarning?
 
     suspend fun listEarningsByAsset(assetId: UUID): List<MonthlyAssetEarning>
+
+    suspend fun listEarningsByDateRange(initDate: LocalDate, endDate: LocalDate): List<AssetEarningReport>
 }
