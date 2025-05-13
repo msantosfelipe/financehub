@@ -29,6 +29,13 @@ enum class AccountType {
     NOT_DEFINED,
 }
 
+internal val accountTypeLabels =
+    mapOf(
+        AccountType.CHECKING_ACCOUNT to "Conta Corrente",
+        AccountType.INVESTMENT to "Investimento",
+        AccountType.NOT_DEFINED to "Não Definido",
+    )
+
 internal fun normalizeAccountName(name: String): String =
     name
         .lowercase()

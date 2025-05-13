@@ -1,9 +1,9 @@
 package com.msantosfelipe.financehub.domains.assets.domain.usecase
 
+import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarning
 import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarningReport
 import com.msantosfelipe.financehub.domains.assets.domain.model.EarningGroupByMonth
 import com.msantosfelipe.financehub.domains.assets.domain.model.EarningItem
-import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarning
 import com.msantosfelipe.financehub.domains.assets.ports.input.AssetEarningServicePort
 import com.msantosfelipe.financehub.domains.assets.ports.output.AssetEarningRepositoryPort
 import jakarta.inject.Singleton
@@ -34,8 +34,7 @@ class AssetEarningUseCase(
         }
     }
 
-    override suspend fun listEarningsByAsset(assetId: UUID): List<AssetEarning> =
-        monthlyAssetEarningRepository.listEarningsByAsset(assetId)
+    override suspend fun listEarningsByAsset(assetId: UUID): List<AssetEarning> = monthlyAssetEarningRepository.listEarningsByAsset(assetId)
 
     override suspend fun listEarningsByDateRange(
         initDate: LocalDate,

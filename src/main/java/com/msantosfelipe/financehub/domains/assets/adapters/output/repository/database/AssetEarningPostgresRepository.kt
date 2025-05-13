@@ -1,7 +1,7 @@
 package com.msantosfelipe.financehub.domains.assets.adapters.output.repository.database
 
-import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarningReport
 import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarning
+import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarningReport
 import io.micronaut.data.annotation.Query
 import io.micronaut.data.jdbc.annotation.JdbcRepository
 import io.micronaut.data.model.query.builder.sql.Dialect

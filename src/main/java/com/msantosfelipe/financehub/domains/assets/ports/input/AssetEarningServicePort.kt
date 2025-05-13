@@ -1,7 +1,7 @@
 package com.msantosfelipe.financehub.domains.assets.ports.input
 
-import com.msantosfelipe.financehub.domains.assets.domain.model.EarningGroupByMonth
 import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarning
+import com.msantosfelipe.financehub.domains.assets.domain.model.EarningGroupByMonth
 import java.time.LocalDate
 import java.util.UUID
 

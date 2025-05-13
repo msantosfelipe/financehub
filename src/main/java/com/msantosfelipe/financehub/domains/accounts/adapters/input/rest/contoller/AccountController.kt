@@ -4,7 +4,9 @@ import com.msantosfelipe.financehub.domains.accounts.adapters.input.rest.dto.Cre
 import com.msantosfelipe.financehub.domains.accounts.adapters.input.rest.dto.UpdateAccountRequest
 import com.msantosfelipe.financehub.domains.accounts.domain.model.Account
 import com.msantosfelipe.financehub.domains.accounts.domain.model.AccountType
+import com.msantosfelipe.financehub.domains.accounts.domain.model.accountTypeLabels
 import com.msantosfelipe.financehub.domains.accounts.ports.input.AccountServicePort
+import com.msantosfelipe.financehub.shared.adapters.rest.dto.EnumOptionDTO
 import com.msantosfelipe.financehub.shared.exceptions.GenericAlreadyExistsException
 import com.msantosfelipe.financehub.shared.exceptions.GenericNotFoundException
 import com.msantosfelipe.financehub.shared.exceptions.rest.dto.ErrorDto
@@ -76,6 +78,18 @@ class AccountController(
     suspend fun getAccountByName(
         @PathVariable searchName: String,
     ): Account = accountService.getAccountByName(searchName)
+
+    @Get("types")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun listAccountTypes(): List<EnumOptionDTO> {
+        val accountTypes = accountService.listAccountTypes()
+        return accountTypes.map {
+            EnumOptionDTO(
+                key = it.name,
+                label = accountTypeLabels[it] ?: it.name,
+            )
+        }
+    }
 
     @Error(global = true)
     fun handleConversionError(

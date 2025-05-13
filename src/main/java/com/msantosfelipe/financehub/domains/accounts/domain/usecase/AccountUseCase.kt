@@ -1,6 +1,7 @@
 package com.msantosfelipe.financehub.domains.accounts.domain.usecase
 
 import com.msantosfelipe.financehub.domains.accounts.domain.model.Account
+import com.msantosfelipe.financehub.domains.accounts.domain.model.AccountType
 import com.msantosfelipe.financehub.domains.accounts.domain.model.normalizeAccountName
 import com.msantosfelipe.financehub.domains.accounts.ports.input.AccountServicePort
 import com.msantosfelipe.financehub.domains.accounts.ports.output.AccountRepositoryPort
@@ -23,4 +24,6 @@ class AccountUseCase(
         accountRepository.getByName(
             name = normalizeAccountName(searchName),
         )
+
+    override fun listAccountTypes(): List<AccountType> = AccountType.entries
 }
