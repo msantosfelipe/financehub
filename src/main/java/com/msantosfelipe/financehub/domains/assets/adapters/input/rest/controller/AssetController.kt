@@ -4,9 +4,9 @@ import com.msantosfelipe.financehub.domains.assets.adapters.input.rest.dto.Asset
 import com.msantosfelipe.financehub.domains.assets.adapters.input.rest.dto.CreateAssetRequest
 import com.msantosfelipe.financehub.domains.assets.domain.model.Asset
 import com.msantosfelipe.financehub.domains.assets.domain.model.EarningGroupByMonth
-import com.msantosfelipe.financehub.domains.assets.domain.model.MonthlyAssetEarning
+import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarning
 import com.msantosfelipe.financehub.domains.assets.ports.input.AssetServicePort
-import com.msantosfelipe.financehub.domains.assets.ports.input.MonthlyAssetEarningServicePort
+import com.msantosfelipe.financehub.domains.assets.ports.input.AssetEarningServicePort
 import com.msantosfelipe.financehub.shared.exceptions.GenericAlreadyExistsException
 import com.msantosfelipe.financehub.shared.exceptions.GenericNotFoundException
 import com.msantosfelipe.financehub.shared.exceptions.rest.dto.ErrorDto
@@ -32,7 +32,7 @@ import java.util.UUID
 @Controller("api/v1/assets")
 class AssetController(
     val assetService: AssetServicePort,
-    val monthlyAssetEarningService: MonthlyAssetEarningServicePort,
+    val monthlyAssetEarningService: AssetEarningServicePort,
 ) {
     @Post
     @Produces(MediaType.APPLICATION_JSON)
@@ -57,7 +57,7 @@ class AssetController(
     ): UUID {
         val asset = assetService.getAssetByTicker(assetEarningRequest.ticker)
         return monthlyAssetEarningService.createOrUpdateEarningEntry(
-            MonthlyAssetEarning(
+            AssetEarning(
                 assetId = asset.id,
                 totalAmountReceived = assetEarningRequest.amountReceived,
                 referenceDate = YearMonth.parse(assetEarningRequest.referenceDate).atEndOfMonth(),
@@ -70,7 +70,7 @@ class AssetController(
     @Produces(MediaType.APPLICATION_JSON)
     suspend fun listEarningsByAsset(
         @PathVariable ticker: String,
-    ): List<MonthlyAssetEarning> {
+    ): List<AssetEarning> {
         val asset = assetService.getAssetByTicker(ticker)
         return monthlyAssetEarningService.listEarningsByAsset(asset.id)
     }

@@ -3,9 +3,9 @@ package com.msantosfelipe.financehub.domains.assets.domain.usecase
 import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarningReport
 import com.msantosfelipe.financehub.domains.assets.domain.model.EarningGroupByMonth
 import com.msantosfelipe.financehub.domains.assets.domain.model.EarningItem
-import com.msantosfelipe.financehub.domains.assets.domain.model.MonthlyAssetEarning
-import com.msantosfelipe.financehub.domains.assets.ports.input.MonthlyAssetEarningServicePort
-import com.msantosfelipe.financehub.domains.assets.ports.output.MonthlyAssetEarningRepositoryPort
+import com.msantosfelipe.financehub.domains.assets.domain.model.AssetEarning
+import com.msantosfelipe.financehub.domains.assets.ports.input.AssetEarningServicePort
+import com.msantosfelipe.financehub.domains.assets.ports.output.AssetEarningRepositoryPort
 import jakarta.inject.Singleton
 import java.text.NumberFormat
 import java.time.LocalDate
@@ -13,10 +13,10 @@ import java.util.Locale
 import java.util.UUID
 
 @Singleton
-class MonthlyAssetEarningUseCase(
-    val monthlyAssetEarningRepository: MonthlyAssetEarningRepositoryPort,
-) : MonthlyAssetEarningServicePort {
-    override suspend fun createOrUpdateEarningEntry(assetEarning: MonthlyAssetEarning): UUID {
+class AssetEarningUseCase(
+    val monthlyAssetEarningRepository: AssetEarningRepositoryPort,
+) : AssetEarningServicePort {
+    override suspend fun createOrUpdateEarningEntry(assetEarning: AssetEarning): UUID {
         val existingEarning =
             monthlyAssetEarningRepository.findByAssetIdAndReferenceDate(
                 assetId = assetEarning.assetId,
@@ -34,7 +34,7 @@ class MonthlyAssetEarningUseCase(
         }
     }
 
-    override suspend fun listEarningsByAsset(assetId: UUID): List<MonthlyAssetEarning> =
+    override suspend fun listEarningsByAsset(assetId: UUID): List<AssetEarning> =
         monthlyAssetEarningRepository.listEarningsByAsset(assetId)
 
     override suspend fun listEarningsByDateRange(

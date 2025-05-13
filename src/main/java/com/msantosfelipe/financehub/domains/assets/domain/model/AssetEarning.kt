@@ -11,7 +11,7 @@ import java.util.UUID
 
 @MappedEntity(value = "asset_earnings")
 @Serdeable
-data class MonthlyAssetEarning(
+data class AssetEarning(
     @field:Id
     val id: UUID = UUID.randomUUID(),
     @MappedProperty("asset_id")
