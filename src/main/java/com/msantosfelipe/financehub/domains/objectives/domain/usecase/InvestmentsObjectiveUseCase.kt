@@ -1,6 +1,9 @@
 package com.msantosfelipe.financehub.domains.objectives.domain.usecase
 
+import com.msantosfelipe.financehub.domains.accounts.domain.model.AccountType
 import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjective
+import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjectiveHorizon
+import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjectiveStatus
 import com.msantosfelipe.financehub.domains.objectives.ports.input.InvestmentsObjectiveServicePort
 import com.msantosfelipe.financehub.domains.objectives.ports.output.InvestmentsObjectiveRepositoryPort
 import jakarta.inject.Singleton
@@ -17,4 +20,9 @@ class InvestmentsObjectiveUseCase(
     override suspend fun getAllObjectives(): List<InvestmentsObjective> = objectiveRepository.getAll()
 
     override suspend fun getObjectiveById(id: UUID): InvestmentsObjective = objectiveRepository.getById(id)
+
+    override fun listInvestmentsObjectiveHorizon(): List<InvestmentsObjectiveHorizon> = InvestmentsObjectiveHorizon.entries
+
+    override fun listInvestmentsObjectiveStatus(): List<InvestmentsObjectiveStatus> = InvestmentsObjectiveStatus.entries
+
 }

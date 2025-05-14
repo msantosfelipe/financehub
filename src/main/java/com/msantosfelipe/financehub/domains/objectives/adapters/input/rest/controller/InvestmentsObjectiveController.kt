@@ -1,9 +1,13 @@
 package com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.controller
 
+import com.msantosfelipe.financehub.domains.accounts.domain.model.accountTypeLabels
 import com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.dto.CreateInvestmentsObjectiveRequestDto
 import com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.dto.UpdateInvestmentsObjectiveRequestDto
 import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjective
+import com.msantosfelipe.financehub.domains.objectives.domain.model.investmentsObjectiveStatusLabels
+import com.msantosfelipe.financehub.domains.objectives.domain.model.nvestmentsObjectiveHorizonLabels
 import com.msantosfelipe.financehub.domains.objectives.ports.input.InvestmentsObjectiveServicePort
+import com.msantosfelipe.financehub.shared.adapters.rest.dto.EnumOptionDTO
 import com.msantosfelipe.financehub.shared.exceptions.GenericNotFoundException
 import com.msantosfelipe.financehub.shared.exceptions.rest.dto.ErrorDto
 import io.micronaut.core.convert.exceptions.ConversionErrorException
@@ -61,6 +65,28 @@ class InvestmentsObjectiveController(
     @Get
     @Produces(MediaType.APPLICATION_JSON)
     suspend fun getAllObjectives(): List<InvestmentsObjective> = objectiveService.getAllObjectives()
+
+    @Get("horizon")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun listInvestmentsObjectiveHorizon(): List<EnumOptionDTO> {
+        return objectiveService.listInvestmentsObjectiveHorizon().map {
+            EnumOptionDTO(
+                key = it.name,
+                label = nvestmentsObjectiveHorizonLabels[it] ?: it.name,
+            )
+        }
+    }
+
+    @Get("status")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun listInvestmentsObjectiveStatus(): List<EnumOptionDTO> {
+        return objectiveService.listInvestmentsObjectiveStatus().map {
+            EnumOptionDTO(
+                key = it.name,
+                label = investmentsObjectiveStatusLabels[it] ?: it.name,
+            )
+        }
+    }
 
     @Error(global = true)
     fun handleConversionError(

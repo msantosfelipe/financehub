@@ -1,6 +1,8 @@
 package com.msantosfelipe.financehub.domains.objectives.ports.input
 
 import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjective
+import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjectiveHorizon
+import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjectiveStatus
 import java.util.UUID
 
 interface InvestmentsObjectiveServicePort {
@@ -11,4 +13,8 @@ interface InvestmentsObjectiveServicePort {
     suspend fun getAllObjectives(): List<InvestmentsObjective>
 
     suspend fun getObjectiveById(id: UUID): InvestmentsObjective
+
+     fun listInvestmentsObjectiveHorizon(): List<InvestmentsObjectiveHorizon> = InvestmentsObjectiveHorizon.entries
+
+     fun listInvestmentsObjectiveStatus(): List<InvestmentsObjectiveStatus> = InvestmentsObjectiveStatus.entries
 }

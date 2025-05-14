@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.objectives.domain.model
 
+import com.msantosfelipe.financehub.domains.accounts.domain.model.AccountType
 import io.micronaut.data.annotation.Id
 import io.micronaut.data.annotation.MappedEntity
 import io.micronaut.data.annotation.MappedProperty
@@ -32,3 +33,17 @@ enum class InvestmentsObjectiveStatus {
     COMPLETED,
     CANCELED,
 }
+
+internal val nvestmentsObjectiveHorizonLabels =
+    mapOf(
+        InvestmentsObjectiveHorizon.SHORT_TERM to "Curto prazo",
+        InvestmentsObjectiveHorizon.MEDIUM_TERM to "Medio prazo",
+        InvestmentsObjectiveHorizon.LONG_TERM to "Longo prazo",
+    )
+
+internal val investmentsObjectiveStatusLabels =
+    mapOf(
+        InvestmentsObjectiveStatus.ACTIVE to "Ativo",
+        InvestmentsObjectiveStatus.COMPLETED to "Concluído",
+        InvestmentsObjectiveStatus.CANCELED to "Cancelado",
+    )

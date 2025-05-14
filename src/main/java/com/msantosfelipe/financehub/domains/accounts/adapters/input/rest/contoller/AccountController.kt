@@ -82,8 +82,7 @@ class AccountController(
     @Get("types")
     @Produces(MediaType.APPLICATION_JSON)
     fun listAccountTypes(): List<EnumOptionDTO> {
-        val accountTypes = accountService.listAccountTypes()
-        return accountTypes.map {
+        return accountService.listAccountTypes().map {
             EnumOptionDTO(
                 key = it.name,
                 label = accountTypeLabels[it] ?: it.name,
