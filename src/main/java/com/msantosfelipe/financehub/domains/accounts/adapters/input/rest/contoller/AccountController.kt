@@ -42,7 +42,7 @@ class AccountController(
                 pix = createAccountRequest.pix,
                 loginUser = createAccountRequest.loginUser,
                 accountType = createAccountRequest.accountType ?: AccountType.NOT_DEFINED,
-                description = createAccountRequest.useDescription,
+                description = createAccountRequest.description,
                 active = createAccountRequest.active ?: true,
             ),
         )
@@ -63,7 +63,7 @@ class AccountController(
                     pix = updateAccountRequest.pix,
                     loginUser = updateAccountRequest.loginUser,
                     accountType = updateAccountRequest.accountType,
-                    description = updateAccountRequest.useDescription,
+                    description = updateAccountRequest.description,
                     active = updateAccountRequest.active,
                 ),
         )

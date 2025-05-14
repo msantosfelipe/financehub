@@ -12,7 +12,7 @@ data class CreateAccountRequest(
     val pix: String?,
     val loginUser: String?,
     val accountType: AccountType?,
-    val useDescription: String?,
+    val description: String?,
     val active: Boolean?,
 )
 
@@ -24,6 +24,6 @@ data class UpdateAccountRequest(
     val pix: String?,
     val loginUser: String?,
     val accountType: AccountType,
-    val useDescription: String?,
+    val description: String?,
     val active: Boolean,
 )
