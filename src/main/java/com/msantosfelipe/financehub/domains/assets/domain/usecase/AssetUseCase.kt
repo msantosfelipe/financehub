@@ -30,11 +30,12 @@ class AssetUseCase(
 
     override suspend fun getAssetByTicker(ticker: String): Asset = assetRepository.getByTicker(ticker)
 
+    override fun listAssetTypes(): List<AssetType> = AssetType.entries
+
     fun convertAssetTypeFromAlphaVantage(type: String): AssetType =
         when (type.lowercase()) {
             "equity" -> AssetType.STOCK
             "mutual fund" -> AssetType.REIT
-            "etf" -> AssetType.ETF
             else -> AssetType.UNKNOWN
         }
 }

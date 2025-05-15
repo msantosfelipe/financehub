@@ -1,6 +1,5 @@
 package com.msantosfelipe.financehub.domains.objectives.domain.model
 
-import com.msantosfelipe.financehub.domains.accounts.domain.model.AccountType
 import io.micronaut.data.annotation.Id
 import io.micronaut.data.annotation.MappedEntity
 import io.micronaut.data.annotation.MappedProperty

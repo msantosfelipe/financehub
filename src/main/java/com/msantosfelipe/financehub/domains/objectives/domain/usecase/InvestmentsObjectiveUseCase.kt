@@ -1,6 +1,5 @@
 package com.msantosfelipe.financehub.domains.objectives.domain.usecase
 
-import com.msantosfelipe.financehub.domains.accounts.domain.model.AccountType
 import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjective
 import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjectiveHorizon
 import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjectiveStatus
@@ -24,5 +23,4 @@ class InvestmentsObjectiveUseCase(
     override fun listInvestmentsObjectiveHorizon(): List<InvestmentsObjectiveHorizon> = InvestmentsObjectiveHorizon.entries
 
     override fun listInvestmentsObjectiveStatus(): List<InvestmentsObjectiveStatus> = InvestmentsObjectiveStatus.entries
-
 }

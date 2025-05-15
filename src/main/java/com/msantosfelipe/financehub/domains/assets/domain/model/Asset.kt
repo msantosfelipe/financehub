@@ -19,6 +19,12 @@ data class Asset(
 enum class AssetType {
     STOCK,
     REIT,
-    ETF,
     UNKNOWN,
 }
+
+internal val assetTypeLabels =
+    mapOf(
+        AssetType.STOCK to "Ação",
+        AssetType.REIT to "FII",
+        AssetType.UNKNOWN to "Não Definido",
+    )

@@ -1,6 +1,5 @@
 package com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.controller
 
-import com.msantosfelipe.financehub.domains.accounts.domain.model.accountTypeLabels
 import com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.dto.CreateInvestmentsObjectiveRequestDto
 import com.msantosfelipe.financehub.domains.objectives.adapters.input.rest.dto.UpdateInvestmentsObjectiveRequestDto
 import com.msantosfelipe.financehub.domains.objectives.domain.model.InvestmentsObjective

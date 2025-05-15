@@ -18,7 +18,7 @@ micronaut:
   http:
     services:
       alpha-vantage:
-        enabled: false
+        enabled: true
         url: "https://www.alphavantage.co"
         read-timeout: 10s
         exception-on-error-status: true

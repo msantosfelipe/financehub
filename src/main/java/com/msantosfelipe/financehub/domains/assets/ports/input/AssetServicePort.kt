@@ -1,6 +1,7 @@
 package com.msantosfelipe.financehub.domains.assets.ports.input
 
 import com.msantosfelipe.financehub.domains.assets.domain.model.Asset
+import com.msantosfelipe.financehub.domains.assets.domain.model.AssetType
 import java.util.UUID
 
 interface AssetServicePort {
@@ -9,4 +10,6 @@ interface AssetServicePort {
     suspend fun getAllAssets(): List<Asset>
 
     suspend fun getAssetByTicker(ticker: String): Asset
+
+    fun listAssetTypes(): List<AssetType>
 }

@@ -14,7 +14,7 @@ interface InvestmentsObjectiveServicePort {
 
     suspend fun getObjectiveById(id: UUID): InvestmentsObjective
 
-     fun listInvestmentsObjectiveHorizon(): List<InvestmentsObjectiveHorizon> = InvestmentsObjectiveHorizon.entries
+    fun listInvestmentsObjectiveHorizon(): List<InvestmentsObjectiveHorizon> = InvestmentsObjectiveHorizon.entries
 
-     fun listInvestmentsObjectiveStatus(): List<InvestmentsObjectiveStatus> = InvestmentsObjectiveStatus.entries
+    fun listInvestmentsObjectiveStatus(): List<InvestmentsObjectiveStatus> = InvestmentsObjectiveStatus.entries
 }
