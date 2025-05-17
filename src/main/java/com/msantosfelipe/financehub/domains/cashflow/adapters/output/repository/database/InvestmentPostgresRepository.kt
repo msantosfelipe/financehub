@@ -2,6 +2,7 @@ package com.msantosfelipe.financehub.domains.cashflow.adapters.output.repository
 
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.Investment
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentEntry
+import io.micronaut.data.annotation.Join
 import io.micronaut.data.jdbc.annotation.JdbcRepository
 import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.repository.kotlin.CoroutineCrudRepository
@@ -15,6 +16,10 @@ interface InvestmentPostgresRepository : CoroutineCrudRepository<Investment, UUI
 
 @JdbcRepository(dialect = Dialect.POSTGRES)
 interface InvestmentEntryPostgresRepository : CoroutineCrudRepository<InvestmentEntry, UUID> {
+    @Join("investment")
+    override suspend fun findById(id: UUID): InvestmentEntry?
+
+    @Join("investment")
     suspend fun findByReferenceDateBetween(
         startDate: LocalDate,
         endDate: LocalDate,

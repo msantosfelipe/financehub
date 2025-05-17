@@ -11,6 +11,7 @@ data class CreateInvestmentEntryDTO(
     val amount: BigDecimal,
 )
 
+@Serdeable
 data class UpdateInvestmentEntryDTO(
     val investmentId: UUID,
     val amount: BigDecimal,
