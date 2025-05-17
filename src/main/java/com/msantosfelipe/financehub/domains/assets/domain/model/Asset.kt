@@ -22,7 +22,7 @@ enum class AssetType {
     UNKNOWN,
 }
 
-internal val assetTypeLabels =
+internal val assetTypeLabelsPTBR =
     mapOf(
         AssetType.STOCK to "Ação",
         AssetType.REIT to "FII",

@@ -3,8 +3,10 @@ package com.msantosfelipe.financehub.domains.cashflow.adapters.input.rest.contro
 import com.msantosfelipe.financehub.domains.cashflow.adapters.input.rest.dto.CreateIncomeEntryDTO
 import com.msantosfelipe.financehub.domains.cashflow.adapters.input.rest.dto.UpdateIncomeEntryDTO
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.IncomeEntry
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.incomeTypeLabelsPTBR
 import com.msantosfelipe.financehub.domains.cashflow.ports.input.IncomeEntryServicePort
 import com.msantosfelipe.financehub.shared.adapters.rest.conversions.Conversions
+import com.msantosfelipe.financehub.shared.adapters.rest.dto.EnumOptionDTO
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
@@ -37,6 +39,17 @@ class IncomeEntryController(
                 description = incomeEntryRequest.description,
             ),
         )
+
+    @Get("types")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun listAccountTypes(): List<EnumOptionDTO> {
+        return incomeEntryService.listIncomeTypes().map {
+            EnumOptionDTO(
+                key = it.name,
+                label = incomeTypeLabelsPTBR[it] ?: it.name,
+            )
+        }
+    }
 
     @Put(value = "/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)

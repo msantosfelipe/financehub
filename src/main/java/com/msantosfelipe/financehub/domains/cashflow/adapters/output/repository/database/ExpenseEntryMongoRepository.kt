@@ -17,6 +17,9 @@ interface ExpenseCategoryPostgresRepository : CoroutineCrudRepository<ExpenseCat
 @JdbcRepository(dialect = Dialect.POSTGRES)
 interface ExpenseEntryMongoRepository : CoroutineCrudRepository<ExpenseEntry, UUID> {
     @Join("category")
+    override suspend fun findById(uuid: UUID): ExpenseEntry
+
+    @Join("category")
     suspend fun findByReferenceDateBetween(
         startDate: LocalDate,
         endDate: LocalDate,

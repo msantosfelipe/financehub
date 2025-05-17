@@ -1,6 +1,7 @@
 package com.msantosfelipe.financehub.domains.cashflow.domain.usecase
 
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.IncomeEntry
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.IncomeType
 import com.msantosfelipe.financehub.domains.cashflow.ports.input.IncomeEntryServicePort
 import com.msantosfelipe.financehub.domains.cashflow.ports.output.IncomeEntryRepositoryPort
 import jakarta.inject.Singleton
@@ -23,4 +24,6 @@ class IncomeEntryUseCase(
         initDate: LocalDate,
         endDate: LocalDate,
     ): List<IncomeEntry> = repository.listIncomeEntriesByDateRange(initDate, endDate)
+
+    override fun listIncomeTypes(): List<IncomeType> = IncomeType.entries
 }

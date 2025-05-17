@@ -2,7 +2,7 @@ package com.msantosfelipe.financehub.domains.assets.adapters.input.rest.controll
 
 import com.msantosfelipe.financehub.domains.assets.adapters.input.rest.dto.CreateAssetRequest
 import com.msantosfelipe.financehub.domains.assets.domain.model.Asset
-import com.msantosfelipe.financehub.domains.assets.domain.model.assetTypeLabels
+import com.msantosfelipe.financehub.domains.assets.domain.model.assetTypeLabelsPTBR
 import com.msantosfelipe.financehub.domains.assets.ports.input.AssetServicePort
 import com.msantosfelipe.financehub.shared.adapters.rest.dto.EnumOptionDTO
 import com.msantosfelipe.financehub.shared.exceptions.GenericAlreadyExistsException
@@ -47,7 +47,7 @@ class AssetController(
         return assetService.listAssetTypes().map {
             EnumOptionDTO(
                 key = it.name,
-                label = assetTypeLabels[it] ?: it.name,
+                label = assetTypeLabelsPTBR[it] ?: it.name,
             )
         }
     }
