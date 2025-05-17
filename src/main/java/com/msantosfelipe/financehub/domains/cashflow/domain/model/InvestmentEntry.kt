@@ -8,7 +8,7 @@ import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.UUID
 
-@MappedEntity(value = "investment_entry")
+@MappedEntity(value = "investments_entry")
 @Serdeable
 data class InvestmentEntry(
     @field:Id
@@ -19,7 +19,7 @@ data class InvestmentEntry(
     val amount: BigDecimal,
 )
 
-@MappedEntity(value = "investment")
+@MappedEntity(value = "investments")
 @Serdeable
 data class Investment(
     @field:Id
