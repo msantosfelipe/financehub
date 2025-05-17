@@ -32,7 +32,7 @@ class AssetEarningsController(
     val assetService: AssetServicePort,
     val assetEarningService: AssetEarningServicePort,
 ) {
-    @Post()
+    @Post
     @Produces(MediaType.APPLICATION_JSON)
     suspend fun createOrUpdateEarning(
         @Body assetEarningRequest: AssetEarningRequest,
@@ -57,13 +57,13 @@ class AssetEarningsController(
         return assetEarningService.listEarningsByAsset(asset.id)
     }
 
-    @Get()
+    @Get
     @Produces(MediaType.APPLICATION_JSON)
     suspend fun listEarningsByDateRange(
         @QueryValue initDate: String,
         @QueryValue endDate: String?,
     ): List<EarningGroupByMonth> {
-        fun parseDates(
+        fun parseYearMonthDates(
             initDate: String,
             endDate: String?,
         ): Pair<LocalDate, LocalDate> {
@@ -79,7 +79,7 @@ class AssetEarningsController(
             }
         }
 
-        val (init, end) = parseDates(initDate, endDate)
+        val (init, end) = parseYearMonthDates(initDate, endDate)
         if (end.isBefore(init)) {
             throw HttpStatusException(
                 HttpStatus.BAD_REQUEST,
