@@ -8,7 +8,7 @@ import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.UUID
 
-@MappedEntity(value = "expense_entry")
+@MappedEntity(value = "expenses_entry")
 @Serdeable
 data class ExpenseEntry(
     @field:Id

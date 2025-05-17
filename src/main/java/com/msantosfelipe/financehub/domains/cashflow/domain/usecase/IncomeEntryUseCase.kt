@@ -13,6 +13,8 @@ class IncomeEntryUseCase(
 ) : IncomeEntryServicePort {
     override suspend fun createIncomeEntry(incomeEntry: IncomeEntry): UUID = repository.createIncomeEntry(incomeEntry)
 
+    override suspend fun getIncomeEntryById(id: UUID): IncomeEntry = repository.getIncomeEntryById(id)
+
     override suspend fun updateIncomeEntry(incomeEntry: IncomeEntry): IncomeEntry = repository.updateIncomeEntry(incomeEntry)
 
     override suspend fun deleteIncomeEntry(id: UUID) = repository.deleteIncomeEntry(id)

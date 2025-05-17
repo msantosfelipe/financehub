@@ -2,6 +2,7 @@ package com.msantosfelipe.financehub.domains.cashflow.adapters.output.repository
 
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.IncomeEntry
 import com.msantosfelipe.financehub.domains.cashflow.ports.output.IncomeEntryRepositoryPort
+import com.msantosfelipe.financehub.shared.exceptions.GenericNotFoundException
 import jakarta.inject.Singleton
 import java.time.LocalDate
 import java.util.UUID
@@ -10,7 +11,16 @@ import java.util.UUID
 class IncomeEntryRepository(
     val repository: IncomeEntryMongoRepository,
 ) : IncomeEntryRepositoryPort {
+    val domainType = "Income"
+
     override suspend fun createIncomeEntry(incomeEntry: IncomeEntry): UUID = repository.save(entity = incomeEntry).id
+
+    override suspend fun getIncomeEntryById(id: UUID): IncomeEntry =
+        repository.findById(id) ?: throw GenericNotFoundException(
+            domainType = domainType,
+            field = "id",
+            value = id.toString(),
+        )
 
     override suspend fun updateIncomeEntry(incomeEntry: IncomeEntry): IncomeEntry = repository.update(entity = incomeEntry)
 

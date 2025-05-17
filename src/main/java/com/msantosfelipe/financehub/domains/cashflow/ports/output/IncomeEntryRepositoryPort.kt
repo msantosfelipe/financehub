@@ -7,6 +7,8 @@ import java.util.UUID
 interface IncomeEntryRepositoryPort {
     suspend fun createIncomeEntry(incomeEntry: IncomeEntry): UUID
 
+    suspend fun getIncomeEntryById(id: UUID): IncomeEntry
+
     suspend fun updateIncomeEntry(incomeEntry: IncomeEntry): IncomeEntry
 
     suspend fun deleteIncomeEntry(id: UUID)
