@@ -23,5 +23,5 @@ data class MonthlyBalance(
     @Column(precision = 15, scale = 2)
     val cashAfterFixedExpenses: BigDecimal,
     @Column(precision = 15, scale = 2)
-    val cashAfterTotalExpenses: BigDecimal
+    val cashAfterTotalExpenses: BigDecimal,
 )
