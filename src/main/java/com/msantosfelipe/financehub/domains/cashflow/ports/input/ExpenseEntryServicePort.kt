@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.cashflow.ports.input
 
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.ExpenseCategory
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.ExpenseEntry
 import java.time.LocalDate
 import java.util.UUID
@@ -7,9 +8,11 @@ import java.util.UUID
 interface ExpenseEntryServicePort {
     suspend fun createExpenseEntry(expenseEntry: ExpenseEntry): UUID
 
-    suspend fun getExpenseEntryById(id: UUID): ExpenseEntry
+    suspend fun getExpenseCategory(categoryName: String): ExpenseCategory
 
-    suspend fun listExpenseCategories(): List<String>
+    suspend fun getAllExpenseCategories(): List<ExpenseCategory>
+
+    suspend fun getExpenseEntryById(id: UUID): ExpenseEntry
 
     suspend fun updateExpenseEntry(expenseEntry: ExpenseEntry): ExpenseEntry
 

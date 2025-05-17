@@ -2,6 +2,7 @@ package com.msantosfelipe.financehub.domains.cashflow.adapters.input.rest.contro
 
 import com.msantosfelipe.financehub.domains.cashflow.adapters.input.rest.dto.CreateExpenseEntryDTO
 import com.msantosfelipe.financehub.domains.cashflow.adapters.input.rest.dto.UpdateExpenseEntryDTO
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.ExpenseCategory
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.ExpenseEntry
 import com.msantosfelipe.financehub.domains.cashflow.ports.input.ExpenseEntryServicePort
 import com.msantosfelipe.financehub.shared.adapters.rest.conversions.Conversions
@@ -26,16 +27,18 @@ class ExpenseEntryController(
     @Produces(MediaType.APPLICATION_JSON)
     suspend fun createExpenseEntry(
         @Body expenseEntryRequest: CreateExpenseEntryDTO,
-    ): UUID =
-        expenseEntryService.createExpenseEntry(
+    ): UUID {
+        val category = expenseEntryService.getExpenseCategory(expenseEntryRequest.category)
+        return expenseEntryService.createExpenseEntry(
             ExpenseEntry(
                 referenceDate = YearMonth.parse(expenseEntryRequest.referenceDate).atEndOfMonth(),
-                category = expenseEntryRequest.category,
+                category = category,
                 amount = expenseEntryRequest.amount,
                 description = expenseEntryRequest.description,
                 isFixedExpense = expenseEntryRequest.isFixedExpense,
             ),
         )
+    }
 
     @Put(value = "/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -44,11 +47,12 @@ class ExpenseEntryController(
         @Body expenseEntryRequest: UpdateExpenseEntryDTO,
     ): ExpenseEntry {
         val expense = expenseEntryService.getExpenseEntryById(uuid)
+        val category = expenseEntryService.getExpenseCategory(expenseEntryRequest.category)
         return expenseEntryService.updateExpenseEntry(
             expenseEntry =
                 expense.copy(
                     referenceDate = expense.referenceDate,
-                    category = expenseEntryRequest.category,
+                    category = category,
                     amount = expenseEntryRequest.amount,
                     description = expenseEntryRequest.description,
                     isFixedExpense = expenseEntryRequest.isFixedExpense,
@@ -58,7 +62,7 @@ class ExpenseEntryController(
 
     @Get("categories")
     @Produces(MediaType.APPLICATION_JSON)
-    suspend fun listExpenseEntriesByDateRange(): List<String> = expenseEntryService.listExpenseCategories()
+    suspend fun listAllExpenseCategories(): List<ExpenseCategory> = expenseEntryService.getAllExpenseCategories()
 
     @Delete(value = "/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
