@@ -1,6 +1,6 @@
 CREATE TABLE investments (
     id UUID PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) UNIQUE NOT NULL,
     type VARCHAR(255) NOT NULL,
     description VARCHAR(255),
     active BOOL NOT NULL
