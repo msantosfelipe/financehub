@@ -22,10 +22,10 @@ data class ExpenseCategory(
 data class ExpenseEntry(
     @field:Id
     val id: UUID = UUID.randomUUID(),
-    @Column(precision = 15, scale = 2)
     val referenceDate: LocalDate,
     @Relation(Relation.Kind.MANY_TO_ONE)
     val category: ExpenseCategory,
+    @Column(precision = 15, scale = 2)
     val amount: BigDecimal,
     val description: String?,
     val isFixedExpense: Boolean = false,

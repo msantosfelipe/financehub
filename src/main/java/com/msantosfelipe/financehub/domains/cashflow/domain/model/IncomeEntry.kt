@@ -13,10 +13,12 @@ import java.util.UUID
 data class IncomeEntry(
     @field:Id
     val id: UUID = UUID.randomUUID(),
-    @Column(precision = 15, scale = 2)
     val referenceDate: LocalDate,
+    @Column(precision = 15, scale = 2)
     val grossAmount: BigDecimal,
+    @Column(precision = 15, scale = 2)
     val discountAmount: BigDecimal,
+    @Column(precision = 15, scale = 2)
     val netAmount: BigDecimal,
     val type: IncomeType,
     val description: String?,
