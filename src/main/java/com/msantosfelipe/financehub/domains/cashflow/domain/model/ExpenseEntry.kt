@@ -8,6 +8,8 @@ import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.UUID
 
+private const val EXPENSE_CATEGORY_OTHER_LABEL_PTBR = "Outra"
+
 @MappedEntity(value = "expenses_entry")
 @Serdeable
 data class ExpenseEntry(
@@ -15,10 +17,8 @@ data class ExpenseEntry(
     val id: UUID = UUID.randomUUID(),
     @Column(precision = 15, scale = 2)
     val referenceDate: LocalDate,
-    val category: String? = EXPENSE_CATEGORY_OTHER_LABEL_PTBR,
+    val category: String = EXPENSE_CATEGORY_OTHER_LABEL_PTBR,
     val amount: BigDecimal,
-    val description: String,
-    val isFixedExpense: Boolean? = false,
+    val description: String?,
+    val isFixedExpense: Boolean = false,
 )
-
-private const val EXPENSE_CATEGORY_OTHER_LABEL_PTBR = "Outros"
