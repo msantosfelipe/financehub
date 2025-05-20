@@ -44,3 +44,16 @@ internal val investmentTypeLabelsPTBR =
         InvestmentType.EMERGENCY_FUND to "Reserva de emergência",
         InvestmentType.UNKNOWN to "Não Definido",
     )
+
+@Serdeable
+data class InvestmentGroupByMonth(
+    val date: String,
+    val investments: Map<InvestmentType, List<InvestmentItem>>,
+)
+
+@Serdeable
+data class InvestmentItem(
+    val name: String,
+    val description: String,
+    val amount: String,
+)

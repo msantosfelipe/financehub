@@ -60,7 +60,6 @@ class AssetEarningUseCase(
                                 )
                             }
                         }
-
                 EarningGroupByMonth(
                     date = date,
                     earnings = earningsGroupedByType,

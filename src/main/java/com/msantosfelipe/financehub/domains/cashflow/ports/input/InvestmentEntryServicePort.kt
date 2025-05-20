@@ -1,6 +1,7 @@
 package com.msantosfelipe.financehub.domains.cashflow.ports.input
 
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentEntry
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentGroupByMonth
 import java.time.LocalDate
 import java.util.UUID
 
@@ -16,5 +17,5 @@ interface InvestmentEntryServicePort {
     suspend fun listInvestmentEntriesByDateRange(
         initDate: LocalDate,
         endDate: LocalDate,
-    ): List<InvestmentEntry>
+    ): List<InvestmentGroupByMonth>
 }

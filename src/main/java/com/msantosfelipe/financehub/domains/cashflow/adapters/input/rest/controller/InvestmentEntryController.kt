@@ -3,6 +3,7 @@ package com.msantosfelipe.financehub.domains.cashflow.adapters.input.rest.contro
 import com.msantosfelipe.financehub.domains.cashflow.adapters.input.rest.dto.CreateInvestmentEntryDTO
 import com.msantosfelipe.financehub.domains.cashflow.adapters.input.rest.dto.UpdateInvestmentEntryDTO
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentEntry
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentGroupByMonth
 import com.msantosfelipe.financehub.domains.cashflow.ports.input.InvestmentEntryServicePort
 import com.msantosfelipe.financehub.domains.cashflow.ports.input.InvestmentServicePort
 import com.msantosfelipe.financehub.shared.adapters.rest.conversions.Conversions
@@ -80,7 +81,7 @@ class InvestmentEntryController(
     suspend fun listInvestmentEntriesByDateRange(
         @QueryValue initDate: String,
         @QueryValue endDate: String?,
-    ): List<InvestmentEntry> {
+    ): List<InvestmentGroupByMonth> {
         val (init, end) = Conversions.parseYearMonthDates(initDate, endDate)
         return investmentEntryService.listInvestmentEntriesByDateRange(init, end)
     }
