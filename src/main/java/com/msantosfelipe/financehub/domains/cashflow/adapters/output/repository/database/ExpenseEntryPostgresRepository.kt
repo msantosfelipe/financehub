@@ -15,7 +15,7 @@ interface ExpenseCategoryPostgresRepository : CoroutineCrudRepository<ExpenseCat
 }
 
 @JdbcRepository(dialect = Dialect.POSTGRES)
-interface ExpenseEntryMongoRepository : CoroutineCrudRepository<ExpenseEntry, UUID> {
+interface ExpenseEntryPostgresRepository : CoroutineCrudRepository<ExpenseEntry, UUID> {
     @Join("category")
     override suspend fun findById(uuid: UUID): ExpenseEntry
 

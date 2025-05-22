@@ -9,7 +9,7 @@ import java.util.UUID
 
 @Singleton
 class IncomeEntryRepository(
-    val repository: IncomeEntryMongoRepository,
+    val repository: IncomeEntryPostgresRepository,
 ) : IncomeEntryRepositoryPort {
     val domainType = "Income"
 

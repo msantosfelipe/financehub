@@ -8,7 +8,7 @@ import java.time.LocalDate
 import java.util.UUID
 
 @JdbcRepository(dialect = Dialect.POSTGRES)
-interface IncomeEntryMongoRepository : CoroutineCrudRepository<IncomeEntry, UUID> {
+interface IncomeEntryPostgresRepository : CoroutineCrudRepository<IncomeEntry, UUID> {
     suspend fun findByReferenceDateBetween(
         startDate: LocalDate,
         endDate: LocalDate,

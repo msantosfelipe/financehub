@@ -12,7 +12,7 @@ import java.util.UUID
 
 @Singleton
 class ExpenseEntryRepository(
-    val repository: ExpenseEntryMongoRepository,
+    val repository: ExpenseEntryPostgresRepository,
 ) : ExpenseEntryRepositoryPort {
     val domainType = "expense"
 
