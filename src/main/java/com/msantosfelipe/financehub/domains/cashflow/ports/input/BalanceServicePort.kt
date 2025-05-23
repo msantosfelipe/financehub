@@ -9,4 +9,9 @@ interface BalanceServicePort {
         fixedExpenseAmount: BigDecimal,
         variableExpenseAmount: BigDecimal,
     )
+
+    suspend fun persistBalanceByInvestment(
+        referenceDate: LocalDate,
+        investmentAmount: BigDecimal,
+    )
 }

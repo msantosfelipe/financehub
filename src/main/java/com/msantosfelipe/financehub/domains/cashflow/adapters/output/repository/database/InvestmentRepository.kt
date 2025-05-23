@@ -6,6 +6,7 @@ import com.msantosfelipe.financehub.domains.cashflow.ports.output.InvestmentEntr
 import com.msantosfelipe.financehub.domains.cashflow.ports.output.InvestmentRepositoryPort
 import com.msantosfelipe.financehub.shared.exceptions.GenericNotFoundException
 import jakarta.inject.Singleton
+import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.UUID
 
@@ -35,7 +36,10 @@ class InvestmentEntryRepository(
 ) : InvestmentEntryRepositoryPort {
     val domainType = "Investment"
 
-    override suspend fun createInvestmentEntry(investmentEntry: InvestmentEntry): UUID = repository.save(entity = investmentEntry).id
+    override suspend fun createInvestmentEntry(investmentEntry: InvestmentEntry): InvestmentEntry =
+        repository.save(
+            entity = investmentEntry,
+        )
 
     override suspend fun getInvestmentEntryById(id: UUID): InvestmentEntry =
         repository.findById(id) ?: throw GenericNotFoundException(
@@ -57,4 +61,9 @@ class InvestmentEntryRepository(
         initDate: LocalDate,
         endDate: LocalDate,
     ): List<InvestmentEntry> = repository.findByReferenceDateBetween(startDate = initDate, endDate = endDate)
+
+    override suspend fun sumAmountsByReferenceDate(referenceDate: LocalDate): BigDecimal =
+        repository.sumAmountsByReferenceDate(
+            referenceDate,
+        )
 }

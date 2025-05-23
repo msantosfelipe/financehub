@@ -35,4 +35,24 @@ class BalanceUseCase(
             balanceRepository.update(updatedBalance)
         }
     }
+
+    override suspend fun persistBalanceByInvestment(
+        referenceDate: LocalDate,
+        investmentAmount: BigDecimal,
+    ) {
+        val existingBalance = balanceRepository.getByReferenceDate(referenceDate)
+
+        val updatedBalance =
+            existingBalance?.copy(totalInvested = investmentAmount)
+                ?: MonthlyBalance(
+                    referenceDate = referenceDate,
+                    totalInvested = investmentAmount,
+                )
+
+        if (existingBalance == null) {
+            balanceRepository.create(updatedBalance)
+        } else {
+            balanceRepository.update(updatedBalance)
+        }
+    }
 }
