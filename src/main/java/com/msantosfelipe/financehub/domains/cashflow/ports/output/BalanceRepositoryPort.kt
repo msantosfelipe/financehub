@@ -1,6 +1,6 @@
-package com.msantosfelipe.financehub.domains.balance.ports.output
+package com.msantosfelipe.financehub.domains.cashflow.ports.output
 
-import com.msantosfelipe.financehub.domains.balance.domain.model.MonthlyBalance
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.MonthlyBalance
 import java.time.LocalDate
 import java.util.UUID
 

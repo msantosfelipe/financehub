@@ -1,4 +1,4 @@
-package com.msantosfelipe.financehub.domains.balance.ports.input
+package com.msantosfelipe.financehub.domains.cashflow.ports.input
 
 import java.math.BigDecimal
 import java.time.LocalDate

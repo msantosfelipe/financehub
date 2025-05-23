@@ -1,7 +1,7 @@
-package com.msantosfelipe.financehub.domains.balance.adapters.output.repository.database
+package com.msantosfelipe.financehub.domains.cashflow.adapters.output.repository.database
 
-import com.msantosfelipe.financehub.domains.balance.domain.model.MonthlyBalance
-import com.msantosfelipe.financehub.domains.balance.ports.output.BalanceRepositoryPort
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.MonthlyBalance
+import com.msantosfelipe.financehub.domains.cashflow.ports.output.BalanceRepositoryPort
 import jakarta.inject.Singleton
 import java.time.LocalDate
 import java.util.UUID

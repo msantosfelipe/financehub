@@ -1,8 +1,8 @@
 package com.msantosfelipe.financehub.domains.cashflow.domain.usecase
 
-import com.msantosfelipe.financehub.domains.cashflow.adapters.output.internal.balance.BalanceInternalClient
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.ExpenseCategory
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.ExpenseEntry
+import com.msantosfelipe.financehub.domains.cashflow.ports.input.BalanceServicePort
 import com.msantosfelipe.financehub.domains.cashflow.ports.input.ExpenseEntryServicePort
 import com.msantosfelipe.financehub.domains.cashflow.ports.output.ExpenseCategoryRepositoryPort
 import com.msantosfelipe.financehub.domains.cashflow.ports.output.ExpenseEntryRepositoryPort
@@ -14,7 +14,7 @@ import java.util.UUID
 class ExpenseEntryUseCase(
     val repository: ExpenseEntryRepositoryPort,
     val expenseCategoryRepository: ExpenseCategoryRepositoryPort,
-    val balanceClient: BalanceInternalClient,
+    val balanceService: BalanceServicePort,
 ) : ExpenseEntryServicePort {
     override suspend fun createExpenseEntry(expenseEntry: ExpenseEntry): UUID {
         val createdEntry = repository.createExpenseEntry(expenseEntry)
@@ -49,7 +49,8 @@ class ExpenseEntryUseCase(
 
     suspend fun persistBalance(referenceDate: LocalDate) {
         val expenseAmount = repository.sumAmountsByReferenceDate(referenceDate)
-        balanceClient.persistBalanceByExpense(
+
+        balanceService.persistBalanceByExpense(
             referenceDate = referenceDate,
             fixedExpenseAmount = expenseAmount.fixedExpenseAmount,
             variableExpenseAmount = expenseAmount.variableExpenseAmount,

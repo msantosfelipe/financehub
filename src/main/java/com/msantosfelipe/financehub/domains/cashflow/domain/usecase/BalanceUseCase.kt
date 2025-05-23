@@ -1,8 +1,8 @@
-package com.msantosfelipe.financehub.domains.balance.domain.usecase
+package com.msantosfelipe.financehub.domains.cashflow.domain.usecase
 
-import com.msantosfelipe.financehub.domains.balance.domain.model.MonthlyBalance
-import com.msantosfelipe.financehub.domains.balance.ports.input.BalanceServicePort
-import com.msantosfelipe.financehub.domains.balance.ports.output.BalanceRepositoryPort
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.MonthlyBalance
+import com.msantosfelipe.financehub.domains.cashflow.ports.input.BalanceServicePort
+import com.msantosfelipe.financehub.domains.cashflow.ports.output.BalanceRepositoryPort
 import jakarta.inject.Singleton
 import java.math.BigDecimal
 import java.time.LocalDate
