@@ -1,10 +1,10 @@
 package com.msantosfelipe.financehub.domains.cashflow.adapters.output.repository.database
 
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.ExpenseAmount
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.ExpenseCategory
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.ExpenseEntry
 import com.msantosfelipe.financehub.domains.cashflow.ports.output.ExpenseCategoryRepositoryPort
 import com.msantosfelipe.financehub.domains.cashflow.ports.output.ExpenseEntryRepositoryPort
-import com.msantosfelipe.financehub.shared.exceptions.GenericNotFoundException
 import jakarta.inject.Singleton
 import kotlinx.coroutines.flow.toList
 import java.time.LocalDate
@@ -14,16 +14,13 @@ import java.util.UUID
 class ExpenseEntryRepository(
     val repository: ExpenseEntryPostgresRepository,
 ) : ExpenseEntryRepositoryPort {
-    val domainType = "expense"
+    override suspend fun createExpenseEntry(expenseEntry: ExpenseEntry): ExpenseEntry = repository.save(entity = expenseEntry)
 
-    override suspend fun createExpenseEntry(expenseEntry: ExpenseEntry): UUID = repository.save(entity = expenseEntry).id
+    override suspend fun getExpenseEntryById(id: UUID): ExpenseEntry = repository.findById(id)
 
-    override suspend fun getExpenseEntryById(id: UUID): ExpenseEntry =
-        repository.findById(id) ?: throw GenericNotFoundException(
-            domainType = domainType,
-            field = "id",
-            value = id.toString(),
-        )
+    override suspend fun sumAmountsByReferenceDate(referenceDate: LocalDate): ExpenseAmount {
+        return repository.sumAmountsByReferenceDate(referenceDate)
+    }
 
     override suspend fun updateExpenseEntry(expenseEntry: ExpenseEntry): ExpenseEntry = repository.update(entity = expenseEntry)
 

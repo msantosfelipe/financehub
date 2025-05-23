@@ -15,13 +15,13 @@ data class MonthlyBalance(
     val id: UUID = UUID.randomUUID(),
     val referenceDate: LocalDate,
     @Column(precision = 15, scale = 2)
-    val totalGrossIncomes: BigDecimal,
+    val totalGrossIncomes: BigDecimal = BigDecimal.ZERO,
     @Column(precision = 15, scale = 2)
-    val totalNetIncomes: BigDecimal,
+    val totalNetIncomes: BigDecimal = BigDecimal.ZERO,
     @Column(precision = 15, scale = 2)
-    val totalFixedExpenses: BigDecimal,
+    val totalFixedExpenses: BigDecimal = BigDecimal.ZERO,
     @Column(precision = 15, scale = 2)
-    val totalOtherExpenses: BigDecimal,
+    val totalOtherExpenses: BigDecimal = BigDecimal.ZERO,
     @Column(precision = 15, scale = 2)
-    val totalInvested: BigDecimal,
+    val totalInvested: BigDecimal = BigDecimal.ZERO,
 )

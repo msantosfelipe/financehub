@@ -1,7 +1,12 @@
 package com.msantosfelipe.financehub.domains.balance.ports.input
 
-import com.msantosfelipe.financehub.domains.balance.domain.model.MonthlyBalance
+import java.math.BigDecimal
+import java.time.LocalDate
 
 interface BalanceServicePort {
-    suspend fun createOrUpdateBalance(balance: MonthlyBalance)
+    suspend fun persistBalanceByExpense(
+        referenceDate: LocalDate,
+        fixedExpenseAmount: BigDecimal,
+        variableExpenseAmount: BigDecimal,
+    )
 }

@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.cashflow.domain.usecase
 
+import com.msantosfelipe.financehub.domains.cashflow.adapters.output.internal.balance.BalanceInternalClient
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.ExpenseCategory
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.ExpenseEntry
 import com.msantosfelipe.financehub.domains.cashflow.ports.input.ExpenseEntryServicePort
@@ -13,8 +14,13 @@ import java.util.UUID
 class ExpenseEntryUseCase(
     val repository: ExpenseEntryRepositoryPort,
     val expenseCategoryRepository: ExpenseCategoryRepositoryPort,
+    val balanceClient: BalanceInternalClient,
 ) : ExpenseEntryServicePort {
-    override suspend fun createExpenseEntry(expenseEntry: ExpenseEntry): UUID = repository.createExpenseEntry(expenseEntry)
+    override suspend fun createExpenseEntry(expenseEntry: ExpenseEntry): UUID {
+        val createdEntry = repository.createExpenseEntry(expenseEntry)
+        persistBalance(createdEntry.referenceDate)
+        return createdEntry.id
+    }
 
     override suspend fun getExpenseCategory(categoryName: String): ExpenseCategory =
         expenseCategoryRepository.getExpenseCategoryByName(categoryName)
@@ -24,12 +30,29 @@ class ExpenseEntryUseCase(
 
     override suspend fun getExpenseEntryById(id: UUID): ExpenseEntry = repository.getExpenseEntryById(id)
 
-    override suspend fun updateExpenseEntry(expenseEntry: ExpenseEntry): ExpenseEntry = repository.updateExpenseEntry(expenseEntry)
+    override suspend fun updateExpenseEntry(expenseEntry: ExpenseEntry): ExpenseEntry {
+        val updatedEntry = repository.updateExpenseEntry(expenseEntry)
+        persistBalance(updatedEntry.referenceDate)
+        return updatedEntry
+    }
 
-    override suspend fun deleteExpenseEntry(id: UUID) = repository.deleteExpenseEntry(id)
+    override suspend fun deleteExpenseEntry(id: UUID) {
+        val expense = getExpenseEntryById(id)
+        repository.deleteExpenseEntry(id)
+        persistBalance(expense.referenceDate)
+    }
 
     override suspend fun listExpenseEntriesByDateRange(
         initDate: LocalDate,
         endDate: LocalDate,
     ): List<ExpenseEntry> = repository.listExpenseEntriesByDateRange(initDate, endDate)
+
+    suspend fun persistBalance(referenceDate: LocalDate) {
+        val expenseAmount = repository.sumAmountsByReferenceDate(referenceDate)
+        balanceClient.persistBalanceByExpense(
+            referenceDate = referenceDate,
+            fixedExpenseAmount = expenseAmount.fixedExpenseAmount,
+            variableExpenseAmount = expenseAmount.variableExpenseAmount,
+        )
+    }
 }

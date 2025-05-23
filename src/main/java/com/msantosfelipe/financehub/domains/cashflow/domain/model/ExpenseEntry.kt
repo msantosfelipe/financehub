@@ -30,3 +30,11 @@ data class ExpenseEntry(
     val description: String?,
     val isFixedExpense: Boolean = false,
 )
+
+@Serdeable
+data class ExpenseAmount(
+    @MappedEntity("fixed_expense_amount")
+    val fixedExpenseAmount: BigDecimal,
+    @MappedEntity("variable_expense_amount")
+    val variableExpenseAmount: BigDecimal,
+)

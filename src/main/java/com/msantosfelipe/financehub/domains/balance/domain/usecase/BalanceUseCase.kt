@@ -4,26 +4,35 @@ import com.msantosfelipe.financehub.domains.balance.domain.model.MonthlyBalance
 import com.msantosfelipe.financehub.domains.balance.ports.input.BalanceServicePort
 import com.msantosfelipe.financehub.domains.balance.ports.output.BalanceRepositoryPort
 import jakarta.inject.Singleton
+import java.math.BigDecimal
+import java.time.LocalDate
 
 @Singleton
 class BalanceUseCase(
     val balanceRepository: BalanceRepositoryPort,
 ) : BalanceServicePort {
-    override suspend fun createOrUpdateBalance(balance: MonthlyBalance) {
-        val existingBalance = balanceRepository.getByReferenceDate(balance.referenceDate)
-        if (existingBalance == null) {
-            balanceRepository.create(balance)
-        } else {
-            balanceRepository.update(
-                balance =
-                    balance.copy(
-                        totalGrossIncomes = balance.totalGrossIncomes,
-                        totalNetIncomes = balance.totalNetIncomes,
-                        totalFixedExpenses = balance.totalFixedExpenses,
-                        totalOtherExpenses = balance.totalOtherExpenses,
-                        totalInvested = balance.totalInvested,
-                    ),
+    override suspend fun persistBalanceByExpense(
+        referenceDate: LocalDate,
+        fixedExpenseAmount: BigDecimal,
+        variableExpenseAmount: BigDecimal,
+    ) {
+        val existingBalance = balanceRepository.getByReferenceDate(referenceDate)
+
+        val updatedBalance =
+            existingBalance?.copy(
+                totalFixedExpenses = fixedExpenseAmount,
+                totalOtherExpenses = variableExpenseAmount,
             )
+                ?: MonthlyBalance(
+                    referenceDate = referenceDate,
+                    totalFixedExpenses = fixedExpenseAmount,
+                    totalOtherExpenses = variableExpenseAmount,
+                )
+
+        if (existingBalance == null) {
+            balanceRepository.create(updatedBalance)
+        } else {
+            balanceRepository.update(updatedBalance)
         }
     }
 }
