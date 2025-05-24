@@ -6,6 +6,9 @@ import io.micronaut.serde.annotation.Serdeable
 import jakarta.persistence.Column
 import java.math.BigDecimal
 import java.time.LocalDate
+import java.time.Month
+import java.time.format.TextStyle
+import java.util.Locale
 import java.util.UUID
 
 @MappedEntity(value = "balances")
@@ -25,6 +28,24 @@ data class MonthlyBalance(
     @Column(precision = 15, scale = 2)
     val totalInvested: BigDecimal = BigDecimal.ZERO,
 )
+
+@Serdeable
+data class CashFlowReportRaw(
+    @MappedEntity("month_number")
+    val monthNumber: Int,
+    @MappedEntity("total_gross_incomes")
+    val totalGrossIncomes: BigDecimal,
+    @MappedEntity("total_net_incomes")
+    val totalNetIncomes: BigDecimal,
+    @MappedEntity("total_fixed_expenses")
+    val totalFixedExpenses: BigDecimal,
+    @MappedEntity("total_other_expenses")
+    val totalOtherExpenses: BigDecimal,
+) {
+    val monthName: String get() =
+        Month.of(monthNumber)
+            .getDisplayName(TextStyle.FULL, Locale("pt", "BR"))
+}
 
 @Serdeable
 data class InvestmentReportRaw(

@@ -1,8 +1,10 @@
 package com.msantosfelipe.financehub.domains.cashflow.ports.input
 
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.CashFlowReportRaw
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentsBalanceReport
 import java.math.BigDecimal
 import java.time.LocalDate
+import java.time.Year
 
 interface BalanceServicePort {
     suspend fun persistBalanceByIncome(
@@ -21,6 +23,8 @@ interface BalanceServicePort {
         referenceDate: LocalDate,
         investmentAmount: BigDecimal,
     )
+
+    suspend fun listCashFlowByYear(year: Year): List<CashFlowReportRaw>
 
     suspend fun getInvestmentsBalanceReport(): InvestmentsBalanceReport
 }

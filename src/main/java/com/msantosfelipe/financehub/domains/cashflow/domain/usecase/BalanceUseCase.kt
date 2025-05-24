@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.cashflow.domain.usecase
 
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.CashFlowReportRaw
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentReport
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentReportRaw
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentsBalanceReport
@@ -86,6 +87,10 @@ class BalanceUseCase(
         } else {
             balanceRepository.update(updatedBalance)
         }
+    }
+
+    override suspend fun listCashFlowByYear(year: Year): List<CashFlowReportRaw> {
+        return balanceRepository.listCashFlowByYear(year.toString())
     }
 
     override suspend fun getInvestmentsBalanceReport(): InvestmentsBalanceReport {
