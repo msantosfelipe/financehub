@@ -18,9 +18,10 @@ class ExpenseEntryRepository(
 
     override suspend fun getExpenseEntryById(id: UUID): ExpenseEntry = repository.findById(id)
 
-    override suspend fun sumAmountsByReferenceDate(referenceDate: LocalDate): ExpenseAmount {
-        return repository.sumAmountsByReferenceDate(referenceDate)
-    }
+    override suspend fun sumAmountsByReferenceDate(referenceDate: LocalDate): ExpenseAmount =
+        repository.sumAmountsByReferenceDate(
+            referenceDate,
+        )
 
     override suspend fun updateExpenseEntry(expenseEntry: ExpenseEntry): ExpenseEntry = repository.update(entity = expenseEntry)
 

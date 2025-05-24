@@ -4,6 +4,12 @@ import java.math.BigDecimal
 import java.time.LocalDate
 
 interface BalanceServicePort {
+    suspend fun persistBalanceByIncome(
+        referenceDate: LocalDate,
+        grossIncomeAmount: BigDecimal,
+        netIncomeAmount: BigDecimal,
+    )
+
     suspend fun persistBalanceByExpense(
         referenceDate: LocalDate,
         fixedExpenseAmount: BigDecimal,

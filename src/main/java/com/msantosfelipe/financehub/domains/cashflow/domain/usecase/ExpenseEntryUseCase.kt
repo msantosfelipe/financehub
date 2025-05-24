@@ -49,7 +49,6 @@ class ExpenseEntryUseCase(
 
     suspend fun persistBalance(referenceDate: LocalDate) {
         val expenseAmount = repository.sumAmountsByReferenceDate(referenceDate)
-
         balanceService.persistBalanceByExpense(
             referenceDate = referenceDate,
             fixedExpenseAmount = expenseAmount.fixedExpenseAmount,

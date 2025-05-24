@@ -11,6 +11,31 @@ import java.time.LocalDate
 class BalanceUseCase(
     val balanceRepository: BalanceRepositoryPort,
 ) : BalanceServicePort {
+    override suspend fun persistBalanceByIncome(
+        referenceDate: LocalDate,
+        grossIncomeAmount: BigDecimal,
+        netIncomeAmount: BigDecimal,
+    ) {
+        val existingBalance = balanceRepository.getByReferenceDate(referenceDate)
+
+        val updatedBalance =
+            existingBalance?.copy(
+                totalGrossIncomes = grossIncomeAmount,
+                totalNetIncomes = netIncomeAmount,
+            )
+                ?: MonthlyBalance(
+                    referenceDate = referenceDate,
+                    totalGrossIncomes = grossIncomeAmount,
+                    totalNetIncomes = netIncomeAmount,
+                )
+
+        if (existingBalance == null) {
+            balanceRepository.create(updatedBalance)
+        } else {
+            balanceRepository.update(updatedBalance)
+        }
+    }
+
     override suspend fun persistBalanceByExpense(
         referenceDate: LocalDate,
         fixedExpenseAmount: BigDecimal,

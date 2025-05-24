@@ -40,3 +40,11 @@ internal val incomeTypeLabelsPTBR =
         IncomeType.TAX_REFUND to "Restituição IR",
         IncomeType.UNKNOWN to "Não Definido",
     )
+
+@Serdeable
+data class IncomeAmount(
+    @MappedEntity("gross_amount")
+    val grossAmount: BigDecimal,
+    @MappedEntity("net_amount")
+    val netAmount: BigDecimal,
+)
