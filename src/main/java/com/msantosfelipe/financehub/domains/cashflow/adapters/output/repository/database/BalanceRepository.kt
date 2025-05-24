@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.cashflow.adapters.output.repository.database
 
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentReportRaw
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.MonthlyBalance
 import com.msantosfelipe.financehub.domains.cashflow.ports.output.BalanceRepositoryPort
 import jakarta.inject.Singleton
@@ -15,4 +16,8 @@ class BalanceRepository(
     override suspend fun update(balance: MonthlyBalance): MonthlyBalance = repository.update(balance)
 
     override suspend fun getByReferenceDate(date: LocalDate): MonthlyBalance? = repository.findByReferenceDate(date)
+
+    override suspend fun listTotalInvestedFromCurrentYear(): List<InvestmentReportRaw> = repository.listInvestedFromCurrentYear()
+
+    override suspend fun listTotalInvestedFromPastYears(): List<InvestmentReportRaw> = repository.listTotalInvestedFromPastYears()
 }

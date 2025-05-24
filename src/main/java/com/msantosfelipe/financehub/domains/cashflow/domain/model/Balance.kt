@@ -25,3 +25,23 @@ data class MonthlyBalance(
     @Column(precision = 15, scale = 2)
     val totalInvested: BigDecimal = BigDecimal.ZERO,
 )
+
+@Serdeable
+data class InvestmentReportRaw(
+    val referenceDate: String,
+    @Column(precision = 15, scale = 2)
+    val totalInvested: BigDecimal,
+)
+
+@Serdeable
+data class InvestmentReport(
+    val referenceDate: String,
+    val totalInvested: BigDecimal,
+    val variancePercent: String,
+)
+
+@Serdeable
+data class InvestmentsBalanceReport(
+    val currentYear: List<InvestmentReport>,
+    val pastYears: List<InvestmentReport>,
+)

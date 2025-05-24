@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.cashflow.ports.input
 
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentsBalanceReport
 import java.math.BigDecimal
 import java.time.LocalDate
 
@@ -20,4 +21,6 @@ interface BalanceServicePort {
         referenceDate: LocalDate,
         investmentAmount: BigDecimal,
     )
+
+    suspend fun getInvestmentsBalanceReport(): InvestmentsBalanceReport
 }
