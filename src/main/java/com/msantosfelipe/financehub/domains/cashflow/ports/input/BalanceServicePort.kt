@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.cashflow.ports.input
 
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.CashFlowBalanceReport
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.CashFlowReportRaw
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentsBalanceReport
 import java.math.BigDecimal
@@ -24,7 +25,7 @@ interface BalanceServicePort {
         investmentAmount: BigDecimal,
     )
 
-    suspend fun listCashFlowByYear(year: Year): List<CashFlowReportRaw>
+    suspend fun listCashFlowByYear(year: Year): List<CashFlowBalanceReport>
 
     suspend fun getInvestmentsBalanceReport(): InvestmentsBalanceReport
 }

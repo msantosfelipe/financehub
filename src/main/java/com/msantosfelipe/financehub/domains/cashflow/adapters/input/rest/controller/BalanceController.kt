@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.cashflow.adapters.input.rest.controller
 
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.CashFlowBalanceReport
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.CashFlowReportRaw
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentsBalanceReport
 import com.msantosfelipe.financehub.domains.cashflow.ports.input.BalanceServicePort
@@ -18,7 +19,7 @@ class BalanceController(
     @Produces(MediaType.APPLICATION_JSON)
     suspend fun getCashFlowBalanceReport(
         @QueryValue year: String,
-    ): List<CashFlowReportRaw> = balanceService.listCashFlowByYear(Year.parse(year))
+    ): List<CashFlowBalanceReport> = balanceService.listCashFlowByYear(Year.parse(year))
 
     @Get("investments")
     @Produces(MediaType.APPLICATION_JSON)

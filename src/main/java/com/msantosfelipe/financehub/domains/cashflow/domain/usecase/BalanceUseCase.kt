@@ -1,5 +1,6 @@
 package com.msantosfelipe.financehub.domains.cashflow.domain.usecase
 
+import com.msantosfelipe.financehub.domains.cashflow.domain.model.CashFlowBalanceReport
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.CashFlowReportRaw
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentReport
 import com.msantosfelipe.financehub.domains.cashflow.domain.model.InvestmentReportRaw
@@ -11,9 +12,12 @@ import jakarta.inject.Singleton
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.time.LocalDate
+import java.time.Month
 import java.time.Year
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.Locale
 
 @Singleton
 class BalanceUseCase(
@@ -89,8 +93,21 @@ class BalanceUseCase(
         }
     }
 
-    override suspend fun listCashFlowByYear(year: Year): List<CashFlowReportRaw> {
-        return balanceRepository.listCashFlowByYear(year.toString())
+    override suspend fun listCashFlowByYear(year: Year): List<CashFlowBalanceReport> {
+        val rawReport = balanceRepository.listCashFlowByYear(year.toString())
+        val report = rawReport.map {
+            CashFlowBalanceReport(
+                monthName = Month.of(it.monthNumber)
+                    .getDisplayName(TextStyle.FULL, Locale("pt", "BR")),
+                totalGrossIncomes = it.totalGrossIncomes,
+                totalNetIncomes = it.totalNetIncomes,
+                totalFixedExpenses = it.totalFixedExpenses,
+                totalOtherExpenses = it.totalOtherExpenses,
+                cashAfterFixedExpenses = it.totalNetIncomes - it.totalFixedExpenses,
+                cashAfterAllExpenses = it.totalNetIncomes - it.totalOtherExpenses
+            )
+        }
+        return report
     }
 
     override suspend fun getInvestmentsBalanceReport(): InvestmentsBalanceReport {

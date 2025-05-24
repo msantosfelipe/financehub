@@ -41,11 +41,18 @@ data class CashFlowReportRaw(
     val totalFixedExpenses: BigDecimal,
     @MappedEntity("total_other_expenses")
     val totalOtherExpenses: BigDecimal,
-) {
-    val monthName: String get() =
-        Month.of(monthNumber)
-            .getDisplayName(TextStyle.FULL, Locale("pt", "BR"))
-}
+)
+
+@Serdeable
+data class CashFlowBalanceReport(
+    val monthName: String,
+    val totalGrossIncomes: BigDecimal,
+    val totalNetIncomes: BigDecimal,
+    val totalFixedExpenses: BigDecimal,
+    val totalOtherExpenses: BigDecimal,
+    val cashAfterFixedExpenses: BigDecimal,
+    val cashAfterAllExpenses: BigDecimal,
+)
 
 @Serdeable
 data class InvestmentReportRaw(
