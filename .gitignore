@@ -7,7 +7,6 @@ out/
 .micronaut/
 .kotlin/
 .idea
-temp
 *.iml
 *.ipr
 *.iws
