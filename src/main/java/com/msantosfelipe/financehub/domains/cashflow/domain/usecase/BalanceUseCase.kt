@@ -140,10 +140,13 @@ class BalanceUseCase(
 
         return sorted.mapIndexed { index, (period, value) ->
             val previous = sorted.getOrNull(index - 1)?.second
-            val variance =
-                previous?.takeIf { it != BigDecimal.ZERO }?.let {
-                    ((value - it) / it * BigDecimal(100)).setScale(2, RoundingMode.HALF_UP).toString() + "%"
-                } ?: "N/A"
+            val variance = if (previous != null && previous.compareTo(BigDecimal.ZERO) != 0) {
+                val diff = (value - previous)
+                val percentage = diff.divide(previous, 4, RoundingMode.HALF_UP) * BigDecimal(100)
+                "${percentage.setScale(2, RoundingMode.HALF_UP)}%"
+            } else {
+                "N/A"
+            }
 
             InvestmentReport(
                 referenceDate = period.toString(),
