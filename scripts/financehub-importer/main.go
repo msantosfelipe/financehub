@@ -16,7 +16,7 @@ func main() {
 	flag.Parse()
 
 	validateSheet(*sheet)
-    fmt.Println("\nStarting import process of FinanceHub for sheet", *sheet)
+	fmt.Println("\nStarting import process of FinanceHub for sheet", *sheet)
 
 	f, err := excelize.OpenFile(filePath)
 	if err != nil {
@@ -43,19 +43,19 @@ func main() {
 		rowIndex := i + 2
 
 		var payload map[string]interface{}
-		if *sheet == Incomes {
-			payload = buildIncomePayload(row, colMap)
-		}
+		var host string
 		switch *sheet {
 		case Incomes:
 			payload = buildIncomePayload(row, colMap)
+			host = fmt.Sprintf("%s/financehub/api/v1/incomes", ApiUrl)
 		case Expenses:
 			payload = buildExpensesPayload(row, colMap)
+			host = fmt.Sprintf("%s/financehub/api/v1/expenses", ApiUrl)
 		default:
 			os.Exit(1)
 		}
 
-		err := sendData(payload, *sheet)
+		err := sendData(payload, host)
 
 		cell, _ := excelize.CoordinatesToCellName(statusCol+1, rowIndex)
 

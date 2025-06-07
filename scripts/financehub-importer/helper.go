@@ -40,8 +40,7 @@ func buildExpensesPayload(row []string, colMap map[string]int) map[string]interf
 	}
 }
 
-func sendData(payload map[string]interface{}, sheet string) error {
-	host := getHost(sheet)
+func sendData(payload map[string]interface{}, host string) error {
 	body, err := json.Marshal(payload)
 	if err != nil {
 		return fmt.Errorf("error serializing JSON: %w", err)
@@ -58,17 +57,6 @@ func sendData(payload map[string]interface{}, sheet string) error {
 	}
 
 	return nil
-}
-
-func getHost(sheet string) string {
-	switch sheet {
-	case Incomes:
-		return fmt.Sprintf("%s/financehub/api/v1/incomes", ApiUrl)
-	case Expenses:
-		return fmt.Sprintf("%s/financehub/api/v1/expenses", ApiUrl)
-	default:
-		return ""
-	}
 }
 
 func validateSheet(sheet string) {
