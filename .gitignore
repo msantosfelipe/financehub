@@ -14,3 +14,4 @@ out/
 .settings
 .classpath
 .factorypath
+scripts/financehub-importer/resources/financehub_import.xlsx
