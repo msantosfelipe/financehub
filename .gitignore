@@ -14,5 +14,3 @@ out/
 .settings
 .classpath
 .factorypath
-./scripts/import_data/data/financehub.xlsx
-./scripts/import_data/financehub_import/
