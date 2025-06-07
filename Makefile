@@ -5,7 +5,7 @@ down:
 	docker compose down
 
 # Importer
-import: truncate-incomes truncate-expenses truncate-expense_category import-incomes import-expenses
+import: truncate-balances truncate-incomes truncate-expenses truncate-expense_category import-incomes import-expenses
 
 build-importer:
 	cd scripts/financehub-importer && go build -o financehub-importer .
@@ -21,6 +21,9 @@ import-incomes-local:
 
 import-expenses-local:
 	cd scripts/financehub-importer && go run . --sheet Expenses
+
+truncate-balances:
+	docker compose exec postgres psql -U root -d financehub -c "TRUNCATE TABLE balances RESTART IDENTITY CASCADE;"
 
 truncate-incomes:
 	docker compose exec postgres psql -U root -d financehub -c "TRUNCATE TABLE incomes_entry RESTART IDENTITY CASCADE;"
