@@ -104,7 +104,7 @@ class BalanceUseCase(
                 totalFixedExpenses = it.totalFixedExpenses,
                 totalOtherExpenses = it.totalOtherExpenses,
                 cashAfterFixedExpenses = it.totalNetIncomes - it.totalFixedExpenses,
-                cashAfterAllExpenses = it.totalNetIncomes - it.totalOtherExpenses
+                cashAfterAllExpenses = it.totalNetIncomes - it.totalFixedExpenses - it.totalOtherExpenses
             )
         }
         return report

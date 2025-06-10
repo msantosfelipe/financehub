@@ -15,3 +15,4 @@ out/
 .classpath
 .factorypath
 scripts/financehub-importer/resources/financehub_import.xlsx
+scripts/financehub-importer/resources/.~lock.financehub_import.xlsx#
