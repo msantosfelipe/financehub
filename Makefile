@@ -5,7 +5,7 @@ down:
 	docker compose down
 
 # Importer
-import: import-incomes import-expenses
+import: truncate-balances import-incomes import-expenses
 
 clean-import: truncate-balances truncate-incomes truncate-expenses truncate-expense_category import-incomes import-expenses
 
