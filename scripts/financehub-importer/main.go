@@ -25,7 +25,9 @@ func main() {
 	validateSheet(*sheet)
 	fmt.Println("Starting import process of FinanceHub for sheet", *sheet)
 
-	if shouldLoadSheetFromDrive(credsPath, spreadsheetID) {
+	importFromDrive := shouldLoadSheetFromDrive(credsPath, spreadsheetID)
+
+	if importFromDrive {
 		fmt.Println("Importing from Google Drive")
 		rows, srv := loadSheetFromDrive(credsPath, spreadsheetID, *sheet)
 		headersIndexMap := getHeadersIndexMap(rows[0])
@@ -53,8 +55,10 @@ func main() {
 			if isRowAlreadyProcessed(headersIndexMap, row) {
 				continue
 			}
+
 			rowIndex := i + 2
 			cell, _ := excelize.CoordinatesToCellName(headersIndexMap["Status"]+1, rowIndex)
+
 			err := processRow(*sheet, headersIndexMap, row)
 			if err != nil {
 				log.Printf("Error in line %d of sheet %s: %v", rowIndex, *sheet, err)
