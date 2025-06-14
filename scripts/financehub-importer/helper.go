@@ -110,13 +110,23 @@ func getString(row []string, index int) string {
 
 func getFloat(row []string, index int) float64 {
 	if index < len(row) {
-		strings.ReplaceAll(row[index], ",", ".")
-		v, err := strconv.ParseFloat(row[index], 64)
+		normalizedValue := normalizeMoney(row[index])
+		v, err := strconv.ParseFloat(normalizedValue, 64)
 		if err == nil {
 			return v
 		}
 	}
 	return 0
+}
+
+// Normalize the input in money format
+// "1.000,00" turns "1000.00"
+func normalizeMoney(input string) string {
+	if strings.Contains(input, ",") {
+		clean := strings.ReplaceAll(input, ".", "")
+		return strings.ReplaceAll(clean, ",", ".")
+	}
+	return input
 }
 
 func getBool(row []string, index int) bool {
