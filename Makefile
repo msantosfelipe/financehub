@@ -5,7 +5,9 @@ down:
 	docker compose down
 
 # Importer
-import: truncate-balances truncate-incomes truncate-expenses truncate-expense_category import-incomes import-expenses
+import: import-incomes import-expenses
+
+clean-import: truncate-balances truncate-incomes truncate-expenses truncate-expense_category import-incomes import-expenses
 
 build-importer:
 	cd scripts/financehub-importer && go build -o financehub-importer .

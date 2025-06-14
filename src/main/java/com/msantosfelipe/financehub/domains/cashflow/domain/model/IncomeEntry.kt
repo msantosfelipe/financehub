@@ -29,6 +29,7 @@ enum class IncomeType {
     TAX_REFUND,
     YEAR_END_BONUS,
     PROFIT_SHARING,
+    VACATION,
     UNKNOWN,
 }
 
@@ -38,6 +39,7 @@ internal val incomeTypeLabelsPTBR =
         IncomeType.YEAR_END_BONUS to "13ª Salário",
         IncomeType.PROFIT_SHARING to "PLR",
         IncomeType.TAX_REFUND to "Restituição IR",
+        IncomeType.VACATION to "Férias",
         IncomeType.UNKNOWN to "Não Definido",
     )
 

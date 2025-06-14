@@ -4,6 +4,9 @@ micronaut:
   server:
     port: 8080
     context-path: /financehub
+    netty:
+      access-logger:
+        enabled: true
     cors:
       enabled: true
       configurations:
