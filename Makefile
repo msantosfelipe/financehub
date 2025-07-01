@@ -1,3 +1,6 @@
+build-app:
+	./gradlew dockerBuild
+
 up:
 	docker compose up -d
 

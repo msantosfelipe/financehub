@@ -241,9 +241,14 @@ financehub/
 - adapters/input/ – Implements entry points like REST controllers, CLI commands, or event listeners.
 - adapters/output/ – Implements integrations with external systems such as databases, caches, and APIs.
 
+### Build & run
+- Run `make build-app`
+- Run `make up`
+- Access http://localhost:8080/financehub/health
+
 ### Importing sample data
 There is an importer script under `/scripts/financehub-importer` built in Golang
 - To import data:
   - Create a file `/scripts/financehub-importer/resources/financehub_import.xlsx` using `financehub_import-sample.xlsx` as example;
-  - Run `make up`
+  - Run `make up` (if database not running)
   - Run `make import`
