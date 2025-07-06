@@ -22,3 +22,6 @@ scripts/financehub-importer/resources/.~lock.financehub_import.xlsx#
 scripts/financehub-importer/resources/creds/
 scripts/financehub-importer/.env
 scripts/financehub-importer/.vscode/
+
+# Db-backup
+scripts/financehub-db-backup/creds
